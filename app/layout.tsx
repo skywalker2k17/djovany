@@ -4,6 +4,9 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Djovany Levasseur — Full-Stack Developer',
   description: 'Full-Stack Developer & Designer. Next.js, TypeScript, Supabase, React Native.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
