@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 type FilterCat =
   | 'all' | 'saas' | 'healthcare' | 'security' | 'ecommerce'
-  | 'beauty' | 'photography' | 'music' | 'business' | 'education' | 'mobile';
+  | 'beauty' | 'photography' | 'music' | 'business' | 'education';
 
 const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
   { id: 'all',         fr: 'Tout voir',    en: 'All' },
@@ -19,20 +19,18 @@ const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
   { id: 'music',       fr: 'Musique',      en: 'Music' },
   { id: 'business',    fr: 'Business',     en: 'Business' },
   { id: 'education',   fr: 'Éducation',    en: 'Education' },
-  { id: 'mobile',      fr: 'Mobile',       en: 'Mobile' },
 ];
 
 const CAT_COLORS: Record<string, string> = {
   saas: '#00D4FF', healthcare: '#4ADE80', beauty: '#F472B6',
   education: '#A78BFA', music: '#FB923C', business: '#94A3B8',
   photography: '#FBBF24', security: '#F87171', ecommerce: '#34D399',
-  mobile: '#38BDF8',
 };
 
 const CAT_ICONS: Record<string, string> = {
   saas: '⚡', healthcare: '🏥', beauty: '💄', education: '🎓',
   music: '🎵', business: '💼', photography: '📷', security: '🔒',
-  ecommerce: '🛒', mobile: '📱',
+  ecommerce: '🛒',
 };
 
 const TYPING_PHRASES: Record<'fr' | 'en', string[]> = {
@@ -224,40 +222,6 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'Tailwind CSS'],
     url: 'https://castdesignstudio.com',
     status: 'unavailable',
-  },
-  // ── Mobile ──
-  {
-    slug: 'expitracker',
-    title: 'ExpiTracker',
-    desc: {
-      fr: 'App mobile de suivi de dates d\'expiration. Alertes intelligentes, scan et gestion de produits.',
-      en: 'Mobile app for tracking expiration dates. Smart alerts, scan and product management.',
-    },
-    category: 'mobile',
-    tags: ['React Native', 'Expo', 'TypeScript'],
-    status: 'development',
-  },
-  {
-    slug: 'jeanty-mobile',
-    title: 'Black Ice Mobile App',
-    desc: {
-      fr: 'App mobile companion pour Black Ice Mobile Detailing. Réservations, suivi et notifications.',
-      en: 'Companion app for Black Ice Mobile Detailing. Bookings, tracking and notifications.',
-    },
-    category: 'mobile',
-    tags: ['React Native', 'TypeScript', 'Supabase'],
-    status: 'development',
-  },
-  {
-    slug: 'moneytrack',
-    title: 'MoneyTrack',
-    desc: {
-      fr: 'App mobile de gestion de dépenses et suivi financier personnel. Catégories, budgets et rapports.',
-      en: 'Mobile expense tracking and personal finance app. Categories, budgets and reports.',
-    },
-    category: 'mobile',
-    tags: ['React Native', 'Expo', 'TypeScript'],
-    status: 'development',
   },
   // ── Music ──
   {
@@ -683,6 +647,183 @@ export default function ProjectsPage() {
                 {isFr
                   ? 'Solution de gestion d\'inventaire pour petites entreprises. iOS & Android.'
                   : 'The ultimate inventory management solution for small businesses. iOS & Android.'}
+              </p>
+            </div>
+          </div>
+
+          {/* ExpiTracker */}
+          <div
+            className="card-border"
+            style={{
+              background: 'var(--bg-2)',
+              borderRadius: '16px',
+              padding: '28px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px',
+            }}
+          >
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '18px',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2.2rem',
+                flexShrink: 0,
+              }}
+            >
+              🗓️
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: '#38BDF8',
+                  marginBottom: '5px',
+                }}
+              >
+                {isFr ? 'Utilitaire · En développement' : 'Utility · In Development'}
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                  margin: '0 0 6px',
+                }}
+              >
+                ExpiTracker
+              </h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0, lineHeight: 1.55 }}>
+                {isFr
+                  ? 'Suivi de dates d\'expiration avec alertes intelligentes et scan de produits.'
+                  : 'Track expiration dates with smart alerts and product scanning.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Black Ice Mobile App */}
+          <div
+            className="card-border"
+            style={{
+              background: 'var(--bg-2)',
+              borderRadius: '16px',
+              padding: '28px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px',
+            }}
+          >
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '18px',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2.2rem',
+                flexShrink: 0,
+              }}
+            >
+              🚗
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: '#38BDF8',
+                  marginBottom: '5px',
+                }}
+              >
+                {isFr ? 'Business · En développement' : 'Business · In Development'}
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                  margin: '0 0 6px',
+                }}
+              >
+                Black Ice Mobile App
+              </h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0, lineHeight: 1.55 }}>
+                {isFr
+                  ? 'App companion pour Black Ice Mobile Detailing. Réservations et suivi en temps réel.'
+                  : 'Companion app for Black Ice Mobile Detailing. Bookings and real-time tracking.'}
+              </p>
+            </div>
+          </div>
+
+          {/* MoneyTrack */}
+          <div
+            className="card-border"
+            style={{
+              background: 'var(--bg-2)',
+              borderRadius: '16px',
+              padding: '28px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px',
+            }}
+          >
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '18px',
+                background: 'rgba(56, 189, 248, 0.08)',
+                border: '1px solid rgba(56, 189, 248, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2.2rem',
+                flexShrink: 0,
+              }}
+            >
+              💰
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: '#38BDF8',
+                  marginBottom: '5px',
+                }}
+              >
+                {isFr ? 'Finance · En développement' : 'Finance · In Development'}
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                  margin: '0 0 6px',
+                }}
+              >
+                MoneyTrack
+              </h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0, lineHeight: 1.55 }}>
+                {isFr
+                  ? 'Gestion de dépenses et suivi financier personnel. Catégories, budgets et rapports.'
+                  : 'Personal expense tracking and financial management. Categories, budgets and reports.'}
               </p>
             </div>
           </div>
