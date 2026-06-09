@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "skills": "Skills",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": ">_ Full-Stack Developer & Designer",
+    "headline": "I build SaaS that",
+    "headline_rotating": ["actually work.", "scale.", "convert.", "impress."],
+    "sub": "Next.js · TypeScript · Supabase · React Native — from landing pages to full SaaS platforms.",
+    "cta_projects": "View my projects",
+    "cta_contact": "Get in touch"
+  },
+  "about": {
+    "label": ">_ About",
+    "title": "Full-Stack based in Port-au-Prince,\nbuilt for the world.",
+    "body": "I design and develop complete digital platforms — from backend architecture to interfaces that convert. My clients range from Haitian startups to Florida-based businesses.",
+    "stat1_value": "12+",
+    "stat1_label": "Projects delivered",
+    "stat2_value": "4",
+    "stat2_label": "SaaS in production",
+    "stat3_value": "3",
+    "stat3_label": "Mobile apps"
+  },
+  "skills": {
+    "label": ">_ Tech Stack",
+    "title": "What I build with.",
+    "cta": "View all skills"
+  },
+  "projects": {
+    "label": ">_ Projects",
+    "title": "What I've built.",
+    "cta": "View all projects",
+    "filter_all": "All",
+    "visit": "Visit site",
+    "preview": "Preview"
+  },
+  "services": {
+    "label": ">_ Services",
+    "title": "What I can do for you.",
+    "cta": "View services"
+  },
+  "contact": {
+    "label": ">_ Contact",
+    "title": "Let's work together.",
+    "sub": "Available for freelance collaborations and long-term projects.",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "built": "Built with Next.js"
+  }
+}
