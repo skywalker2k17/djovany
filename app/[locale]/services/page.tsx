@@ -214,7 +214,7 @@ export default function ServicesPage() {
               fontWeight: 600,
               fontSize: '0.9rem',
               textDecoration: 'none',
-              fontFamily: 'Space Grotesk, sans-serif',
+              fontFamily: 'Inter, sans-serif',
             }}
           >
             {locale === 'fr' ? 'Me contacter →' : 'Get in touch →'}

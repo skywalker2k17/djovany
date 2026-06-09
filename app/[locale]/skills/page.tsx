@@ -105,7 +105,7 @@ export default function SkillsPage() {
             >
               <p
                 style={{
-                  fontFamily: 'Space Grotesk, monospace',
+                  fontFamily: 'Inter, monospace',
                   fontSize: '0.7rem',
                   fontWeight: 600,
                   letterSpacing: '0.12em',

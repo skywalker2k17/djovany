@@ -22,7 +22,7 @@ const SkillIcon = ({ name }: { name: string }) => {
   return (
     <span
       style={{
-        fontFamily: 'Space Grotesk, monospace',
+        fontFamily: 'Inter, monospace',
         fontWeight: 700,
         fontSize: '0.65rem',
         letterSpacing: '0.02em',

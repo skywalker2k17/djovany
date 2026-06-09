@@ -78,7 +78,7 @@ export default function Navbar({ locale }: { locale: string }) {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontFamily: 'Inter, sans-serif',
                   fontSize: '0.875rem',
                   fontWeight: 500,
                   color: active ? 'var(--accent)' : 'var(--text-muted)',

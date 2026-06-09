@@ -1,17 +1,17 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
 
 :root {
   --bg: #0A0A0F;
   --bg-2: #0F0F17;
   --bg-3: #141420;
-  --border: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.09);
   --accent: #00D4FF;
   --accent-dim: rgba(0, 212, 255, 0.12);
-  --text: #E8E8F0;
-  --text-muted: #6B6B8A;
-  --text-dim: #3A3A55;
+  --text: #F0F0F8;
+  --text-muted: #A0A0C0;
+  --text-dim: #6B6B8A;
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +23,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
 
 .eyebrow {
-  font-family: 'Space Grotesk', monospace;
+  font-family: 'Inter', monospace;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.12em;

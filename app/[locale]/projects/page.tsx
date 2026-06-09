@@ -74,7 +74,7 @@ export default function ProjectsPage() {
                 letterSpacing: '0.06em',
                 textTransform: 'uppercase',
                 cursor: 'pointer',
-                fontFamily: 'Space Grotesk, sans-serif',
+                fontFamily: 'Inter, sans-serif',
                 transition: 'all 0.2s',
               }}
             >

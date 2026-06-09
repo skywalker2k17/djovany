@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Hero({ locale }: { locale: string }) {
@@ -132,7 +133,7 @@ export default function Hero({ locale }: { locale: string }) {
                   fontWeight: 600,
                   fontSize: '0.9rem',
                   textDecoration: 'none',
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontFamily: 'Inter, sans-serif',
                   transition: 'opacity 0.2s',
                   letterSpacing: '0.02em',
                 }}
@@ -152,7 +153,7 @@ export default function Hero({ locale }: { locale: string }) {
                   fontWeight: 500,
                   fontSize: '0.9rem',
                   textDecoration: 'none',
-                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontFamily: 'Inter, sans-serif',
                   transition: 'border-color 0.2s',
                   letterSpacing: '0.02em',
                 }}
@@ -175,33 +176,13 @@ export default function Hero({ locale }: { locale: string }) {
               position: 'relative',
             }}
           >
-            {/* Placeholder — remplace par <Image> avec ta vraie photo */}
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                background: 'linear-gradient(160deg, var(--bg-3) 0%, var(--bg-2) 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'var(--text-dim)',
-                fontSize: '0.8rem',
-                fontFamily: 'Space Grotesk, sans-serif',
-                textAlign: 'center',
-              }}
-            >
-              {/* Replace with:
-              <Image
-                src="/djovany.png"
-                alt="Djovany Levasseur"
-                fill
-                style={{ objectFit: 'cover', objectPosition: 'top' }}
-              /> */}
-              <span>
-                Photo<br />
-                <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>/public/djovany.png</span>
-              </span>
-            </div>
+            <Image
+              src="/djovany.png"
+              alt="Djovany Levasseur"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'top' }}
+              priority
+            />
 
             {/* Accent line */}
             <div

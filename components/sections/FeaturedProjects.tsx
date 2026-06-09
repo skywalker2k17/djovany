@@ -154,7 +154,7 @@ export default function FeaturedProjects({ locale }: { locale: string }) {
                         background: 'var(--bg-3)',
                         padding: '3px 8px',
                         borderRadius: '4px',
-                        fontFamily: 'Space Grotesk, monospace',
+                        fontFamily: 'Inter, monospace',
                       }}
                     >
                       {tag}
