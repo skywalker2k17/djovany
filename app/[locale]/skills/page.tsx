@@ -169,7 +169,7 @@ const TECH_GROUPS = [
   { eyebrow: '>_ backend', label: 'Backend & DB', techs: ['Supabase', 'PostgreSQL', 'Node.js', 'REST APIs'] },
   { eyebrow: '>_ mobile', label: 'Mobile', techs: ['React Native', 'Expo', 'Expo Router', 'EAS Build'] },
   { eyebrow: '>_ devops', label: 'DevOps', techs: ['Turborepo', 'Vercel', 'Git & GitHub', 'next-intl'] },
-  { eyebrow: '>_ payments', label: 'Paiements', techs: ['MonCash', 'Sogebank', 'Nodemailer', 'AdMob'] },
+  { eyebrow: '>_ payments', label: 'Paiements', techs: ['MonCash', 'Stripe', 'Nodemailer', 'AdMob'] },
   { eyebrow: '>_ design', label: 'Design & Outils', techs: ['Figma', 'WordPress', 'WooCommerce', 'SEO'] },
 ];
 
