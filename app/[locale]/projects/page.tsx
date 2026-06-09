@@ -749,7 +749,7 @@ export default function ProjectsPage() {
                   marginBottom: '5px',
                 }}
               >
-                {isFr ? 'Business · En développement' : 'Business · In Development'}
+                {isFr ? 'Business · Disponible' : 'Business · Available'}
               </div>
               <h3
                 style={{
@@ -761,11 +761,32 @@ export default function ProjectsPage() {
               >
                 Black Ice Mobile App
               </h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: 0, lineHeight: 1.55 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: '0 0 18px', lineHeight: 1.55 }}>
                 {isFr
                   ? 'App companion pour Black Ice Mobile Detailing. Réservations et suivi en temps réel.'
                   : 'Companion app for Black Ice Mobile Detailing. Bookings and real-time tracking.'}
               </p>
+              <Link
+                href="https://apps.apple.com/us/app/jeanty-mobile-detailing/id6764403324"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(56, 189, 248, 0.1)',
+                  color: '#38BDF8',
+                  border: '1px solid rgba(56, 189, 248, 0.3)',
+                  padding: '8px 18px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                App Store ↗
+              </Link>
             </div>
           </div>
 
