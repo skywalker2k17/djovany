@@ -88,10 +88,10 @@ const SKILLS: Skill[] = [
   {
     icon: '⚛️',
     title: { fr: 'React Native', en: 'React Native Dev' },
-    tags: 'Expo · iOS · Android',
+    tags: 'iOS · Android',
     desc: {
-      fr: 'Applications mobiles performantes et multi-plateformes avec Expo SDK.',
-      en: 'High-performance cross-platform mobile apps with Expo SDK.',
+      fr: 'Applications mobiles performantes pour iOS et Android.',
+      en: 'High-performance mobile apps for iOS and Android.',
     },
     level: 92,
     category: 'tech',
@@ -156,7 +156,7 @@ const SKILLS: Skill[] = [
 const TECH_GROUPS = [
   { eyebrow: '>_ frontend', label: 'Frontend', techs: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'] },
   { eyebrow: '>_ backend', label: 'Backend & DB', techs: ['Supabase', 'PostgreSQL', 'Node.js', 'REST APIs'] },
-  { eyebrow: '>_ mobile', label: 'Mobile', techs: ['React Native', 'Expo', 'Expo Router', 'EAS Build'] },
+  { eyebrow: '>_ mobile', label: 'Mobile', techs: ['React Native', 'Android', 'iOS', 'EAS Build'] },
   { eyebrow: '>_ devops', label: 'DevOps', techs: ['Turborepo', 'Vercel', 'Git & GitHub', 'next-intl'] },
   { eyebrow: '>_ payments', label: 'Paiements', techs: ['MonCash', 'Stripe', 'Nodemailer', 'AdMob'] },
   { eyebrow: '>_ seo', label: 'SEO & Outils', techs: ['WordPress', 'WooCommerce', 'SEO', 'Analytics'] },
