@@ -61,16 +61,6 @@ const SERVICES: Service[] = [
     category: 'web',
   },
   {
-    icon: '◐',
-    title: { fr: 'UI/UX Design', en: 'UI/UX Design' },
-    desc: {
-      fr: 'Design systems, maquettes Figma, refonte d\'interface. Identité visuelle cohérente et UX optimisée pour la conversion.',
-      en: 'Design systems, Figma mockups, interface redesign. Consistent visual identity and UX optimized for conversion.',
-    },
-    tags: ['Figma', 'Design System', 'Responsive', 'Branding'],
-    category: 'web',
-  },
-  {
     icon: '⬟',
     title: { fr: 'Intégration Paiements', en: 'Payment Integration' },
     desc: {
