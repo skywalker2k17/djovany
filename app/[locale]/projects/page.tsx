@@ -54,17 +54,6 @@ interface Project {
 const PROJECTS: Project[] = [
   // ── SaaS ──
   {
-    slug: 'lucky-jj',
-    title: 'Lucky JJ',
-    desc: {
-      fr: 'Plateforme de loterie SaaS. Admin dashboard, résultats en temps réel, POS vendeur et gestion de tickets.',
-      en: 'Lottery SaaS platform. Admin dashboard, real-time results, vendor POS and ticket management.',
-    },
-    category: 'saas',
-    tags: ['Next.js', 'TypeScript', 'Supabase'],
-    status: 'development',
-  },
-  {
     slug: 'wellpax',
     title: 'WellPax',
     desc: {
@@ -86,7 +75,7 @@ const PROJECTS: Project[] = [
     category: 'saas',
     tags: ['Next.js', 'TypeScript', 'Supabase'],
     url: 'https://jjsimex.com',
-    status: 'live',
+    status: 'unavailable',
   },
   {
     slug: 'jdp-rentacar',
@@ -172,18 +161,6 @@ const PROJECTS: Project[] = [
     category: 'business',
     tags: ['WordPress'],
     url: 'https://synergyreal-tech.net',
-    status: 'live',
-  },
-  {
-    slug: 'worldwide',
-    title: 'Worldwide Assistance Services',
-    desc: {
-      fr: 'Solutions d\'assistance mondiale.',
-      en: 'Global assistance solutions.',
-    },
-    category: 'business',
-    tags: ['WordPress'],
-    url: 'https://worldwideassistanceservices.com',
     status: 'live',
   },
   {
@@ -707,28 +684,6 @@ export default function ProjectsPage() {
                   ? 'Solution de gestion d\'inventaire pour petites entreprises. iOS & Android.'
                   : 'The ultimate inventory management solution for small businesses. iOS & Android.'}
               </p>
-              <Link
-                href="https://apps.apple.com/app/id6767330659"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: 'rgba(0, 212, 255, 0.1)',
-                  color: 'var(--accent)',
-                  border: '1px solid rgba(0, 212, 255, 0.3)',
-                  padding: '8px 18px',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  fontFamily: 'Inter, sans-serif',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {isFr ? 'Télécharger' : 'Download'} ↗
-              </Link>
             </div>
           </div>
 
