@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation';
 
 type FilterCat =
   | 'all' | 'saas' | 'healthcare' | 'security' | 'ecommerce'
-  | 'beauty' | 'photography' | 'music' | 'business' | 'education';
+  | 'beauty' | 'photography' | 'music' | 'business' | 'education' | 'mobile';
 
 const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
   { id: 'all',         fr: 'Tout voir',    en: 'All' },
@@ -19,18 +19,20 @@ const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
   { id: 'music',       fr: 'Musique',      en: 'Music' },
   { id: 'business',    fr: 'Business',     en: 'Business' },
   { id: 'education',   fr: 'Éducation',    en: 'Education' },
+  { id: 'mobile',      fr: 'Mobile',       en: 'Mobile' },
 ];
 
 const CAT_COLORS: Record<string, string> = {
   saas: '#00D4FF', healthcare: '#4ADE80', beauty: '#F472B6',
   education: '#A78BFA', music: '#FB923C', business: '#94A3B8',
   photography: '#FBBF24', security: '#F87171', ecommerce: '#34D399',
+  mobile: '#38BDF8',
 };
 
 const CAT_ICONS: Record<string, string> = {
   saas: '⚡', healthcare: '🏥', beauty: '💄', education: '🎓',
   music: '🎵', business: '💼', photography: '📷', security: '🔒',
-  ecommerce: '🛒',
+  ecommerce: '🛒', mobile: '📱',
 };
 
 const TYPING_PHRASES: Record<'fr' | 'en', string[]> = {
@@ -51,6 +53,17 @@ interface Project {
 
 const PROJECTS: Project[] = [
   // ── SaaS ──
+  {
+    slug: 'lucky-jj',
+    title: 'Lucky JJ',
+    desc: {
+      fr: 'Plateforme de loterie SaaS. Admin dashboard, résultats en temps réel, POS vendeur et gestion de tickets.',
+      en: 'Lottery SaaS platform. Admin dashboard, real-time results, vendor POS and ticket management.',
+    },
+    category: 'saas',
+    tags: ['Next.js', 'TypeScript', 'Supabase'],
+    status: 'development',
+  },
   {
     slug: 'wellpax',
     title: 'WellPax',
@@ -138,6 +151,18 @@ const PROJECTS: Project[] = [
   },
   // ── Business ──
   {
+    slug: 'jeanty-detailing',
+    title: 'Black Ice Mobile Detailing',
+    desc: {
+      fr: 'Service de detailing automobile mobile. Réservation Calendly, paiements Square, carte des services.',
+      en: 'Mobile car detailing service. Calendly booking, Square payments, service map.',
+    },
+    category: 'business',
+    tags: ['Next.js', 'TypeScript', 'Square'],
+    url: 'https://blackicemobile.net',
+    status: 'live',
+  },
+  {
     slug: 'synergy',
     title: 'Synergy Real-Tech',
     desc: {
@@ -188,6 +213,17 @@ const PROJECTS: Project[] = [
   },
   // ── Beauty ──
   {
+    slug: 'magnificence',
+    title: 'Magnificence',
+    desc: {
+      fr: 'Boutique beauté en ligne. Collections cheveux, extensions, réservation, bien-être et mode.',
+      en: 'Online beauty boutique. Hair collections, extensions, booking, wellness and fashion.',
+    },
+    category: 'beauty',
+    tags: ['Next.js', 'TypeScript', 'Supabase'],
+    status: 'development',
+  },
+  {
     slug: 'chiccils',
     title: 'Chiccils',
     desc: {
@@ -211,6 +247,40 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'Tailwind CSS'],
     url: 'https://castdesignstudio.com',
     status: 'unavailable',
+  },
+  // ── Mobile ──
+  {
+    slug: 'expitracker',
+    title: 'ExpiTracker',
+    desc: {
+      fr: 'App mobile de suivi de dates d\'expiration. Alertes intelligentes, scan et gestion de produits.',
+      en: 'Mobile app for tracking expiration dates. Smart alerts, scan and product management.',
+    },
+    category: 'mobile',
+    tags: ['React Native', 'Expo', 'TypeScript'],
+    status: 'development',
+  },
+  {
+    slug: 'jeanty-mobile',
+    title: 'Black Ice Mobile App',
+    desc: {
+      fr: 'App mobile companion pour Black Ice Mobile Detailing. Réservations, suivi et notifications.',
+      en: 'Companion app for Black Ice Mobile Detailing. Bookings, tracking and notifications.',
+    },
+    category: 'mobile',
+    tags: ['React Native', 'TypeScript', 'Supabase'],
+    status: 'development',
+  },
+  {
+    slug: 'moneytrack',
+    title: 'MoneyTrack',
+    desc: {
+      fr: 'App mobile de gestion de dépenses et suivi financier personnel. Catégories, budgets et rapports.',
+      en: 'Mobile expense tracking and personal finance app. Categories, budgets and reports.',
+    },
+    category: 'mobile',
+    tags: ['React Native', 'Expo', 'TypeScript'],
+    status: 'development',
   },
   // ── Music ──
   {
@@ -236,6 +306,17 @@ const PROJECTS: Project[] = [
     tags: ['WordPress'],
     url: 'https://panoutchicpanou.com',
     status: 'live',
+  },
+  {
+    slug: 'us-prodz',
+    title: 'US Prodz · Da Label',
+    desc: {
+      fr: 'Label musical et plateforme de production. Artistes, salle de spectacle Scofield, booking et production.',
+      en: 'Music label and production platform. Artists, Scofield Playhouse venue, booking and production.',
+    },
+    category: 'music',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    status: 'development',
   },
 ];
 
