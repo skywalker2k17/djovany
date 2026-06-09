@@ -30,7 +30,7 @@ export default function About() {
             </p>
             <h2
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 700,
                 fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
                 lineHeight: 1.15,
@@ -78,7 +78,7 @@ export default function About() {
               >
                 <div
                   style={{
-                    fontFamily: 'Syne, sans-serif',
+                    fontFamily: 'Plus Jakarta Sans, sans-serif',
                     fontWeight: 800,
                     fontSize: '2.5rem',
                     color: 'var(--accent)',
@@ -108,6 +108,8 @@ export default function About() {
         @media (max-width: 768px) {
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+          .stats-grid > div { padding: 20px 12px !important; }
+          .stats-grid .stat-value { font-size: 1.8rem !important; }
         }
       `}</style>
     </section>

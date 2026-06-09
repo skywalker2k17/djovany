@@ -40,7 +40,7 @@ export default function ProjectsPage() {
         </p>
         <h1
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
             fontWeight: 800,
             fontSize: 'clamp(2rem, 4vw, 3.5rem)',
             letterSpacing: '-0.03em',
@@ -139,7 +139,7 @@ export default function ProjectsPage() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: 'Syne, sans-serif',
+                      fontFamily: 'Plus Jakarta Sans, sans-serif',
                       fontWeight: 700,
                       fontSize: '1.1rem',
                       margin: '0 0 6px',

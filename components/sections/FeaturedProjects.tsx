@@ -36,7 +36,7 @@ export default function FeaturedProjects({ locale }: { locale: string }) {
             </p>
             <h2
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 700,
                 fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
                 letterSpacing: '-0.025em',
@@ -122,7 +122,7 @@ export default function FeaturedProjects({ locale }: { locale: string }) {
                 <div>
                   <h3
                     style={{
-                      fontFamily: 'Syne, sans-serif',
+                      fontFamily: 'Plus Jakarta Sans, sans-serif',
                       fontWeight: 700,
                       fontSize: '1.25rem',
                       margin: '0 0 8px',

@@ -55,7 +55,7 @@ export default function SkillsPreview({ locale }: { locale: string }) {
             </p>
             <h2
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 700,
                 fontSize: 'clamp(1.8rem, 3vw, 2.8rem)',
                 letterSpacing: '-0.025em',

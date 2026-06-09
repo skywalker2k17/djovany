@@ -49,7 +49,7 @@ export default function Navbar({ locale }: { locale: string }) {
         <Link
           href={`/${locale}`}
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
             fontWeight: 800,
             fontSize: '1.1rem',
             color: 'var(--text)',

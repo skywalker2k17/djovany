@@ -74,7 +74,7 @@ export default function ServicesPage() {
         </p>
         <h1
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
             fontWeight: 800,
             fontSize: 'clamp(2rem, 4vw, 3.5rem)',
             letterSpacing: '-0.03em',
@@ -133,7 +133,7 @@ export default function ServicesPage() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: 'Syne, sans-serif',
+                      fontFamily: 'Plus Jakarta Sans, sans-serif',
                       fontWeight: 700,
                       fontSize: '1.1rem',
                       margin: '0 0 10px',
@@ -187,7 +187,7 @@ export default function ServicesPage() {
         >
           <h2
             style={{
-              fontFamily: 'Syne, sans-serif',
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
               fontWeight: 700,
               fontSize: 'clamp(1.5rem, 3vw, 2.2rem)',
               margin: '0 0 12px',

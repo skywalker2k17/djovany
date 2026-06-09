@@ -70,14 +70,14 @@ export default function Hero({ locale }: { locale: string }) {
           className="hero-grid"
         >
           {/* Text */}
-          <div>
+          <div style={{ minWidth: 0 }}>
             <p className="eyebrow" style={{ marginBottom: '24px' }}>
               {t('eyebrow')}
             </p>
 
             <h1
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 800,
                 fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                 lineHeight: 1.05,
@@ -91,7 +91,7 @@ export default function Hero({ locale }: { locale: string }) {
 
             <h1
               style={{
-                fontFamily: 'Syne, sans-serif',
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
                 fontWeight: 800,
                 fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                 lineHeight: 1.05,
@@ -200,14 +200,21 @@ export default function Hero({ locale }: { locale: string }) {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .hero-grid {
             grid-template-columns: 1fr !important;
+            gap: 40px !important;
           }
           .hero-photo {
-            width: 200px !important;
-            height: 250px !important;
+            width: 160px !important;
+            height: 200px !important;
             margin: 0 auto;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-photo {
+            width: 130px !important;
+            height: 165px !important;
           }
         }
       `}</style>
