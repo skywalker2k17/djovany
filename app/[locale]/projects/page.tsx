@@ -110,31 +110,7 @@ const PROJECTS: Project[] = [
     url: 'https://primehome.care',
     status: 'live',
   },
-  {
-    slug: 'sarh',
-    title: 'Centre Dentaire SARH',
-    desc: {
-      fr: 'Site complet pour clinique dentaire — clinique, pharmacie et école hygiéniste.',
-      en: 'Full dental site — clinic, pharmacy and dental hygiene school.',
-    },
-    category: 'healthcare',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    url: 'https://centredentairesarh.com',
-    status: 'live',
-  },
   // ── Education ──
-  {
-    slug: 'sarh-ecole',
-    title: 'École Dentaire SARH',
-    desc: {
-      fr: 'Plateforme d\'éducation dentaire. Formation en hygiène dentaire.',
-      en: 'Dental education platform. Dental hygiene training.',
-    },
-    category: 'education',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    url: 'https://ecole.centredentairesarh.com',
-    status: 'live',
-  },
   {
     slug: 'mci',
     title: 'Matching Caregivers Institute',
@@ -183,18 +159,6 @@ const PROJECTS: Project[] = [
     category: 'business',
     tags: ['WordPress'],
     url: 'https://worldwideassistanceservices.com',
-    status: 'live',
-  },
-  {
-    slug: 'sarh-pharmacie',
-    title: 'Pharmacie SARH',
-    desc: {
-      fr: 'Pharmacie associée au Centre Dentaire SARH.',
-      en: 'Pharmacy associated with Centre Dentaire SARH.',
-    },
-    category: 'business',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    url: 'https://pharmacie.centredentairesarh.com',
     status: 'live',
   },
   {
