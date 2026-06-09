@@ -9,7 +9,7 @@ type FilterCat = 'all' | 'web' | 'marketing' | 'tech' | 'security';
 
 const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
   { id: 'all', fr: 'Tout voir', en: 'All Skills' },
-  { id: 'web', fr: 'Web & Design', en: 'Web & Design' },
+  { id: 'web', fr: 'Web & Dev', en: 'Web & Dev' },
   { id: 'marketing', fr: 'Marketing', en: 'Marketing' },
   { id: 'tech', fr: 'Tech & Mobile', en: 'Tech & Mobile' },
   { id: 'security', fr: 'Sécurité', en: 'Security' },
@@ -39,17 +39,6 @@ const SKILLS: Skill[] = [
       en: 'Fast, responsive and modern websites built with cutting-edge technologies.',
     },
     level: 95,
-    category: 'web',
-  },
-  {
-    icon: '🎨',
-    title: { fr: 'UI/UX Design', en: 'UI/UX Design' },
-    tags: 'Figma · Design Systems · Responsive',
-    desc: {
-      fr: 'Interfaces intuitives et esthétiques qui améliorent l\'expérience utilisateur.',
-      en: 'Intuitive and aesthetic interfaces that enhance the user experience.',
-    },
-    level: 88,
     category: 'web',
   },
   {
@@ -170,7 +159,7 @@ const TECH_GROUPS = [
   { eyebrow: '>_ mobile', label: 'Mobile', techs: ['React Native', 'Expo', 'Expo Router', 'EAS Build'] },
   { eyebrow: '>_ devops', label: 'DevOps', techs: ['Turborepo', 'Vercel', 'Git & GitHub', 'next-intl'] },
   { eyebrow: '>_ payments', label: 'Paiements', techs: ['MonCash', 'Stripe', 'Nodemailer', 'AdMob'] },
-  { eyebrow: '>_ design', label: 'Design & Outils', techs: ['Figma', 'WordPress', 'WooCommerce', 'SEO'] },
+  { eyebrow: '>_ seo', label: 'SEO & Outils', techs: ['WordPress', 'WooCommerce', 'SEO', 'Analytics'] },
 ];
 
 export default function SkillsPage() {
