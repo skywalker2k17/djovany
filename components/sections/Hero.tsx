@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export default function Hero({ locale }: { locale: string }) {
@@ -162,40 +161,6 @@ export default function Hero({ locale }: { locale: string }) {
               </Link>
             </div>
           </div>
-
-          {/* Photo */}
-          <div
-            className="hero-photo"
-            style={{
-              width: '300px',
-              height: '380px',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              border: '1px solid var(--border)',
-              flexShrink: 0,
-              position: 'relative',
-            }}
-          >
-            <Image
-              src="/djovany.png"
-              alt="Djovany Levasseur"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'top' }}
-              priority
-            />
-
-            {/* Accent line */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '3px',
-                background: 'linear-gradient(90deg, var(--accent), transparent)',
-              }}
-            />
-          </div>
         </div>
       </div>
 
@@ -204,17 +169,6 @@ export default function Hero({ locale }: { locale: string }) {
           .hero-grid {
             grid-template-columns: 1fr !important;
             gap: 40px !important;
-          }
-          .hero-photo {
-            width: 160px !important;
-            height: 200px !important;
-            margin: 0 auto;
-          }
-        }
-        @media (max-width: 480px) {
-          .hero-photo {
-            width: 130px !important;
-            height: 165px !important;
           }
         }
       `}</style>
