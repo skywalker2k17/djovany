@@ -74,7 +74,8 @@ const PROJECTS: Project[] = [
     category: 'saas',
     tags: ['Next.js', 'TypeScript', 'Supabase'],
     url: 'https://jjsimex.com',
-    status: 'unavailable',
+    status: 'live',
+    noPreview: true,
   },
   {
     slug: 'jdp-rentacar',
@@ -124,7 +125,7 @@ const PROJECTS: Project[] = [
     category: 'education',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     url: 'http://matchingcaregivers.institute',
-    status: 'development',
+    status: 'live',
   },
   {
     slug: 'playbook-learning',
