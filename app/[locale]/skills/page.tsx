@@ -23,7 +23,7 @@ const TYPING_PHRASES: Record<'fr' | 'en', string[]> = {
 interface Skill {
   icon: string;
   title: { fr: string; en: string };
-  tags: string;
+  tags: { fr: string; en: string };
   desc: { fr: string; en: string };
   level: number;
   category: Exclude<FilterCat, 'all'>;
@@ -33,7 +33,7 @@ const SKILLS: Skill[] = [
   {
     icon: '💻',
     title: { fr: 'Développement Web', en: 'Web Development' },
-    tags: 'Next.js · TypeScript · WordPress',
+    tags: { fr: 'Next.js · TypeScript · WordPress', en: 'Next.js · TypeScript · WordPress' },
     desc: {
       fr: 'Sites et applications web rapides, responsifs et modernes avec les dernières technologies.',
       en: 'Fast, responsive and modern websites built with cutting-edge technologies.',
@@ -44,7 +44,7 @@ const SKILLS: Skill[] = [
   {
     icon: '📈',
     title: { fr: 'SEO & Analytics', en: 'SEO & Analytics' },
-    tags: 'Google Analytics · Search Console',
+    tags: { fr: 'Google Analytics · Search Console', en: 'Google Analytics · Search Console' },
     desc: {
       fr: 'Visibilité améliorée en ligne et suivi précis des performances.',
       en: 'Improved online visibility and precise performance tracking.',
@@ -55,7 +55,7 @@ const SKILLS: Skill[] = [
   {
     icon: '📱',
     title: { fr: 'Réseaux Sociaux', en: 'Social Media' },
-    tags: 'Contenu · Stratégie · Croissance',
+    tags: { fr: 'Contenu · Stratégie · Croissance', en: 'Content · Strategy · Growth' },
     desc: {
       fr: 'Marques développées avec du contenu créatif et des stratégies d\'engagement efficaces.',
       en: 'Brands grown through creative content and effective engagement strategies.',
@@ -66,7 +66,7 @@ const SKILLS: Skill[] = [
   {
     icon: '📣',
     title: { fr: 'Marketing Digital', en: 'Digital Marketing' },
-    tags: 'Facebook Ads · Google Ads',
+    tags: { fr: 'Facebook Ads · Google Ads', en: 'Facebook Ads · Google Ads' },
     desc: {
       fr: 'Campagnes publicitaires ciblées qui génèrent des ventes et des conversions.',
       en: 'Targeted ad campaigns that drive sales and conversions.',
@@ -77,7 +77,7 @@ const SKILLS: Skill[] = [
   {
     icon: '🎵',
     title: { fr: 'Technologie Musicale', en: 'Music Tech' },
-    tags: 'Distribution · Droits · Monétisation',
+    tags: { fr: 'Distribution · Droits · Monétisation', en: 'Distribution · Rights · Monetization' },
     desc: {
       fr: 'Gestion des droits musicaux et monétisation des œuvres artistiques.',
       en: 'Music rights management and monetization of artistic works.',
@@ -88,7 +88,7 @@ const SKILLS: Skill[] = [
   {
     icon: '⚛️',
     title: { fr: 'React Native', en: 'React Native Dev' },
-    tags: 'iOS · Android',
+    tags: { fr: 'iOS · Android', en: 'iOS · Android' },
     desc: {
       fr: 'Applications mobiles performantes pour iOS et Android.',
       en: 'High-performance mobile apps for iOS and Android.',
@@ -99,7 +99,7 @@ const SKILLS: Skill[] = [
   {
     icon: '🗄️',
     title: { fr: 'Backend & Base de données', en: 'Backend & Database' },
-    tags: 'Supabase · PostgreSQL · Node.js',
+    tags: { fr: 'Supabase · PostgreSQL · Node.js', en: 'Supabase · PostgreSQL · Node.js' },
     desc: {
       fr: 'APIs robustes et bases de données sécurisées pour des applications scalables.',
       en: 'Robust APIs and secure databases for scalable applications.',
@@ -110,7 +110,7 @@ const SKILLS: Skill[] = [
   {
     icon: '📲',
     title: { fr: 'Réparation Téléphone', en: 'Phone Repair' },
-    tags: 'Hardware · Software · Diagnostic',
+    tags: { fr: 'Hardware · Software · Diagnostic', en: 'Hardware · Software · Diagnostics' },
     desc: {
       fr: 'Diagnostic et réparation de smartphones toutes marques, software et hardware.',
       en: 'Diagnosing and repairing all smartphone brands, hardware and software.',
@@ -121,7 +121,7 @@ const SKILLS: Skill[] = [
   {
     icon: '🖥️',
     title: { fr: 'Réparation PC', en: 'PC Repair' },
-    tags: 'Dépannage · Optimisation · Installation',
+    tags: { fr: 'Dépannage · Optimisation · Installation', en: 'Troubleshooting · Optimization · Installation' },
     desc: {
       fr: 'Réparation et optimisation d\'ordinateurs Windows et macOS.',
       en: 'Repairing and optimizing Windows and macOS computers.',
@@ -132,7 +132,7 @@ const SKILLS: Skill[] = [
   {
     icon: '🔒',
     title: { fr: 'Cybersécurité', en: 'Cybersecurity' },
-    tags: 'Pentesting · Audits · OSINT',
+    tags: { fr: 'Pentesting · Audits · OSINT', en: 'Pentesting · Audits · OSINT' },
     desc: {
       fr: 'Audits de sécurité et protection des systèmes contre les menaces numériques.',
       en: 'Security audits and system protection against digital threats.',
@@ -143,7 +143,7 @@ const SKILLS: Skill[] = [
   {
     icon: '🔑',
     title: { fr: 'Récupération de Compte', en: 'Account Recovery' },
-    tags: 'Comptes piratés · 2FA · Réseaux sociaux',
+    tags: { fr: 'Comptes piratés · 2FA · Réseaux sociaux', en: 'Hacked Accounts · 2FA · Social Media' },
     desc: {
       fr: 'Récupération d\'accès aux comptes bloqués ou compromis sur toutes plateformes.',
       en: 'Recovering access to locked or compromised accounts on all platforms.',
@@ -322,7 +322,7 @@ export default function SkillsPage() {
                       opacity: 0.8,
                     }}
                   >
-                    {skill.tags}
+                    {skill.tags[isFr ? 'fr' : 'en']}
                   </p>
                 </div>
 
