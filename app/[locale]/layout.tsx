@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import Navbar from '@/components/sections/Navbar';
 import Footer from '@/components/sections/Footer';
+import ScrollButtons from '@/components/sections/ScrollButtons';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -29,6 +30,7 @@ export default async function LocaleLayout({
       <Navbar locale={locale} />
       <main>{children}</main>
       <Footer />
+      <ScrollButtons />
     </NextIntlClientProvider>
   );
 }
