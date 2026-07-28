@@ -338,17 +338,6 @@ const PROJECTS: Project[] = [
     status: 'live',
   },
   {
-    slug: 'us-prodz',
-    title: 'US Prodz · Da Label',
-    desc: {
-      fr: 'Label musical et plateforme de production. Artistes, salle de spectacle Scofield, booking et production.',
-      en: 'Music label and production platform. Artists, Scofield Playhouse venue, booking and production.',
-    },
-    category: 'music',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    status: 'development',
-  },
-  {
     slug: 'chedy-pwa',
     title: 'Chedy Ebebe',
     desc: {
@@ -357,17 +346,6 @@ const PROJECTS: Project[] = [
     },
     category: 'music',
     tags: ['Next.js', 'TypeScript', 'PWA'],
-    status: 'development',
-  },
-  {
-    slug: 'canaan-fm',
-    title: 'Canaan FM',
-    desc: {
-      fr: 'Radio underground francophone. Musique, culture et actualités sans filtre.',
-      en: 'Francophone underground radio. Music, culture and unfiltered news.',
-    },
-    category: 'music',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     status: 'development',
   },
 ];
