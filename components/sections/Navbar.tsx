@@ -123,7 +123,7 @@ export default function Navbar({ locale }: { locale: string }) {
             color: 'var(--text)',
             padding: '8px',
           }}
-          aria-label="Toggle menu"
+          aria-label={t('toggle_menu')}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             {open ? (

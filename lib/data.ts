@@ -153,8 +153,7 @@ export const projects: Project[] = [
     },
     category: 'mobile',
     tags: ['React Native', 'Expo', 'TypeScript'],
-    status: 'live',
-    url: 'https://apps.apple.com/app/id6767330659',
+    status: 'development',
   },
   {
     slug: 'fingerprint-services',

@@ -114,7 +114,7 @@ export default function FeaturedProjects({ locale }: { locale: string }) {
                         textTransform: 'uppercase',
                       }}
                     >
-                      In dev
+                      {t('in_dev')}
                     </span>
                   )}
                 </div>

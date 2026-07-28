@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function ScrollButtons() {
+  const t = useTranslations('scroll');
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function ScrollButtons() {
       {visible && (
         <button
           onClick={scrollToTop}
-          aria-label="Back to top"
+          aria-label={t('top')}
           className="scroll-btn"
           style={buttonStyle}
         >
@@ -56,7 +58,7 @@ export default function ScrollButtons() {
       )}
       <button
         onClick={scrollToBottom}
-        aria-label="Scroll to bottom"
+        aria-label={t('bottom')}
         className="scroll-btn"
         style={buttonStyle}
       >

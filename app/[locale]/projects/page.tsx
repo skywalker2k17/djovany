@@ -732,16 +732,13 @@ export default function ProjectsPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '18px',
-                background: 'rgba(0, 212, 255, 0.08)',
+                overflow: 'hidden',
                 border: '1px solid rgba(0, 212, 255, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2.2rem',
                 flexShrink: 0,
+                position: 'relative',
               }}
             >
-              📦
+              <Image src="/app-icons/stockeasy.png" alt="StockEasy" fill sizes="80px" />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
@@ -754,7 +751,7 @@ export default function ProjectsPage() {
                   marginBottom: '5px',
                 }}
               >
-                {isFr ? 'Productivité · Disponible' : 'Productivity · Available'}
+                {isFr ? 'Productivité · En développement' : 'Productivity · In Development'}
               </div>
               <h3
                 style={{
@@ -791,16 +788,13 @@ export default function ProjectsPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '18px',
-                background: 'rgba(56, 189, 248, 0.08)',
+                overflow: 'hidden',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2.2rem',
                 flexShrink: 0,
+                position: 'relative',
               }}
             >
-              🗓️
+              <Image src="/app-icons/expitracker.png" alt="ExpiTracker" fill sizes="80px" />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
@@ -1004,16 +998,13 @@ export default function ProjectsPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '18px',
-                background: 'rgba(56, 189, 248, 0.08)',
+                overflow: 'hidden',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2.2rem',
                 flexShrink: 0,
+                position: 'relative',
               }}
             >
-              💰
+              <Image src="/app-icons/moneytrack.png" alt="MoneyTrack" fill sizes="80px" />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div

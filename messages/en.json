@@ -4,7 +4,8 @@
     "projects": "Projects",
     "skills": "Skills",
     "services": "Services",
-    "contact": "Contact"
+    "contact": "Contact",
+    "toggle_menu": "Toggle menu"
   },
   "hero": {
     "eyebrow": ">_ Full-Stack Developer & Designer",
@@ -36,7 +37,8 @@
     "cta": "View all projects",
     "filter_all": "All",
     "visit": "Visit site",
-    "preview": "Preview"
+    "preview": "Preview",
+    "in_dev": "In dev"
   },
   "services": {
     "label": ">_ Services",
@@ -54,5 +56,9 @@
   "footer": {
     "rights": "All rights reserved",
     "built": "Built with Next.js"
+  },
+  "scroll": {
+    "top": "Back to top",
+    "bottom": "Scroll to bottom"
   }
 }
