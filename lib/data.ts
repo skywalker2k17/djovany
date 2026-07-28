@@ -60,7 +60,6 @@ export const projects: Project[] = [
     tags: ['HTML', 'CSS', 'JavaScript', 'Netlify'],
     url: 'https://centredentairesarh.com',
     status: 'live',
-    featured: true,
   },
   {
     slug: 'care-restore',

@@ -19,11 +19,11 @@
     "label": ">_ About",
     "title": "Full-Stack based in Port-au-Prince,\nbuilt for the world.",
     "body": "I design and develop complete digital platforms — from backend architecture to interfaces that convert. My clients range from Haitian startups to Florida-based businesses.",
-    "stat1_value": "12+",
+    "stat1_value": "25+",
     "stat1_label": "Projects delivered",
-    "stat2_value": "4",
-    "stat2_label": "SaaS in production",
-    "stat3_value": "3",
+    "stat2_value": "5",
+    "stat2_label": "SaaS platforms",
+    "stat3_value": "5",
     "stat3_label": "Mobile apps"
   },
   "skills": {
@@ -52,6 +52,10 @@
     "email": "Email",
     "whatsapp": "WhatsApp",
     "linkedin": "LinkedIn"
+  },
+  "faq": {
+    "label": ">_ FAQ",
+    "title": "Frequently asked questions."
   },
   "footer": {
     "rights": "All rights reserved",
