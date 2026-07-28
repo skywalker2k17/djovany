@@ -47,6 +47,7 @@ interface Project {
   url?: string;
   status?: 'live' | 'development' | 'unavailable';
   badge?: { fr: string; en: string; color: string };
+  noPreview?: boolean;
 }
 
 const PROJECTS: Project[] = [
@@ -98,6 +99,7 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'TypeScript', 'Supabase'],
     url: 'https://carerestorehomecare.com',
     status: 'live',
+    noPreview: true,
   },
   {
     slug: 'prime-home-care',
@@ -204,8 +206,7 @@ const PROJECTS: Project[] = [
     },
     category: 'business',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    url: 'https://gardoucleaning.com',
-    status: 'live',
+    status: 'development',
   },
   {
     slug: 'chloela-glowup',
@@ -336,7 +337,7 @@ const PROJECTS: Project[] = [
     category: 'music',
     tags: ['WordPress'],
     url: 'https://panoutchicpanou.com',
-    status: 'live',
+    status: 'unavailable',
   },
   {
     slug: 'chedy-pwa',
@@ -465,7 +466,7 @@ export default function ProjectsPage() {
         >
           {filtered.map((project) => {
             const color = CAT_COLORS[project.category] || 'var(--accent)';
-            const hasPreview = !!project.url && project.status === 'live';
+            const hasPreview = !!project.url && project.status === 'live' && !project.noPreview;
 
             return (
               <div
