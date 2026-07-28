@@ -185,7 +185,8 @@ const PROJECTS: Project[] = [
     },
     category: 'business',
     tags: ['Next.js', 'TypeScript'],
-    status: 'development',
+    url: 'https://mbtaxplusmultiservicesinc.infinityfreeapp.com/',
+    status: 'live',
   },
   {
     slug: 'baboushie',
