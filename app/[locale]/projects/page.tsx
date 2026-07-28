@@ -123,6 +123,17 @@ const PROJECTS: Project[] = [
     url: 'http://matchingcaregivers.institute',
     status: 'development',
   },
+  {
+    slug: 'playbook-learning',
+    title: 'Playbook Learning',
+    desc: {
+      fr: 'Développement des compétences académiques et des habitudes de vie saines pour les enfants.',
+      en: 'Building the academic skills and healthy habits children need to make winning plays for life.',
+    },
+    category: 'education',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    status: 'development',
+  },
   // ── Security ──
   {
     slug: 'fingerprint',
@@ -172,6 +183,51 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'TypeScript'],
     status: 'development',
   },
+  {
+    slug: 'baboushie',
+    title: 'Baboushie',
+    desc: {
+      fr: 'Site vitrine pour créatrice de contenu beauté et lifestyle. Bio, parcours, témoignages.',
+      en: 'Portfolio site for a beauty and lifestyle content creator. Bio, journey, testimonials.',
+    },
+    category: 'business',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    status: 'development',
+  },
+  {
+    slug: 'gardou',
+    title: 'Gardou Cleaning Services LLC',
+    desc: {
+      fr: 'Services de nettoyage professionnel pour maisons, bureaux, appartements et Airbnb.',
+      en: 'Professional cleaning services for homes, offices, apartments and Airbnb properties.',
+    },
+    category: 'business',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    url: 'https://gardoucleaning.com',
+    status: 'live',
+  },
+  {
+    slug: 'chloela-glowup',
+    title: 'Chloela GlowUp Cleaning Co.',
+    desc: {
+      fr: 'Nettoyage résidentiel premium. Réservation en ligne, paiements Stripe.',
+      en: 'Premium residential cleaning. Online booking, Stripe payments.',
+    },
+    category: 'business',
+    tags: ['Next.js', 'Tailwind CSS', 'Supabase', 'Stripe'],
+    status: 'development',
+  },
+  {
+    slug: 'belfich-pam',
+    title: 'Bèlfich PAM',
+    desc: {
+      fr: 'Plateforme de paris sportifs. Cotes sur la Ligue Haïtienne et compétitions internationales, dépôts MonCash/NatCash.',
+      en: 'Sports betting platform. Odds on the Haitian League and international competitions, MonCash/NatCash deposits.',
+    },
+    category: 'business',
+    tags: ['Next.js', 'TypeScript', 'next-intl'],
+    status: 'development',
+  },
   // ── E-commerce ──
   {
     slug: 'shassy',
@@ -185,6 +241,28 @@ const PROJECTS: Project[] = [
     url: 'https://shassystore.com',
     status: 'live',
     badge: { fr: 'Restauré après piratage', en: 'Restored After Hack', color: '#10b981' },
+  },
+  {
+    slug: 'sm-boutik',
+    title: 'SM Boutik',
+    desc: {
+      fr: 'E-commerce de mode style Fashion Nova. Catalogue, panier, checkout.',
+      en: 'Fashion Nova-style e-commerce. Catalog, cart, checkout.',
+    },
+    category: 'ecommerce',
+    tags: ['Next.js', 'TypeScript'],
+    status: 'development',
+  },
+  {
+    slug: 'virlug',
+    title: 'Virlug',
+    desc: {
+      fr: 'Boutique en ligne de sneakers et jerseys premium.',
+      en: 'Premium sneakers and jerseys online store.',
+    },
+    category: 'ecommerce',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    status: 'development',
   },
   // ── Beauty ──
   {
@@ -223,6 +301,17 @@ const PROJECTS: Project[] = [
     url: 'https://castdesignstudio.com',
     status: 'unavailable',
   },
+  {
+    slug: 'veralux-studios',
+    title: 'VeraLux Studios',
+    desc: {
+      fr: 'Photographie portrait, mariage, mode et événementiel. Galeries, réservation avec acompte Stripe.',
+      en: 'Portrait, wedding, fashion and event photography. Galleries, Stripe deposit booking.',
+    },
+    category: 'photography',
+    tags: ['Next.js', 'TypeScript', 'Stripe', 'Turborepo'],
+    status: 'development',
+  },
   // ── Music ──
   {
     slug: 'rtm',
@@ -254,6 +343,28 @@ const PROJECTS: Project[] = [
     desc: {
       fr: 'Label musical et plateforme de production. Artistes, salle de spectacle Scofield, booking et production.',
       en: 'Music label and production platform. Artists, Scofield Playhouse venue, booking and production.',
+    },
+    category: 'music',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    status: 'development',
+  },
+  {
+    slug: 'chedy-pwa',
+    title: 'Chedy Ebebe',
+    desc: {
+      fr: 'Fan app officielle de Chedy Ebebe, artiste rap haïtien. Musique exclusive, lifestyle, DM direct.',
+      en: 'Official fan app for Chedy Ebebe, Haitian rap artist. Exclusive music, lifestyle, direct DM.',
+    },
+    category: 'music',
+    tags: ['Next.js', 'TypeScript', 'PWA'],
+    status: 'development',
+  },
+  {
+    slug: 'canaan-fm',
+    title: 'Canaan FM',
+    desc: {
+      fr: 'Radio underground francophone. Musique, culture et actualités sans filtre.',
+      en: 'Francophone underground radio. Music, culture and unfiltered news.',
     },
     category: 'music',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS'],
