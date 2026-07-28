@@ -358,6 +358,7 @@ export default function ProjectsPage() {
   const isFr = locale === 'fr';
 
   const [filter, setFilter] = useState<FilterCat>('all');
+  const [showAll, setShowAll] = useState(false);
   const [typingIdx, setTypingIdx] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -390,6 +391,9 @@ export default function ProjectsPage() {
   }, [charIdx, isDeleting, typingIdx, isFr]);
 
   const filtered = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+  const INITIAL_COUNT = 6;
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const hasMore = filtered.length > INITIAL_COUNT;
 
   return (
     <section style={{ padding: '120px 24px 80px' }}>
@@ -440,7 +444,7 @@ export default function ProjectsPage() {
           {FILTERS.map((f) => (
             <button
               key={f.id}
-              onClick={() => setFilter(f.id)}
+              onClick={() => { setFilter(f.id); setShowAll(false); }}
               style={{
                 padding: '8px 20px',
                 borderRadius: '100px',
@@ -461,10 +465,10 @@ export default function ProjectsPage() {
 
         {/* ── Project Cards ── */}
         <div
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '96px' }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '32px' }}
           className="projects-page-grid"
         >
-          {filtered.map((project) => {
+          {visible.map((project) => {
             const color = CAT_COLORS[project.category] || 'var(--accent)';
             const hasPreview = !!project.url && project.status === 'live' && !project.noPreview;
 
@@ -651,6 +655,31 @@ export default function ProjectsPage() {
             );
           })}
         </div>
+
+        {hasMore && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '96px' }}>
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              style={{
+                padding: '12px 32px',
+                borderRadius: '100px',
+                border: '1px solid var(--border)',
+                background: 'var(--bg-2)',
+                color: 'var(--accent)',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                fontFamily: 'Inter, sans-serif',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              {showAll
+                ? (isFr ? 'Voir moins ↑' : 'View less ↑')
+                : (isFr ? `Voir plus (${filtered.length - INITIAL_COUNT}) ↓` : `View more (${filtered.length - INITIAL_COUNT}) ↓`)}
+            </button>
+          </div>
+        )}
+        {!hasMore && <div style={{ marginBottom: '96px' }} />}
 
         {/* ── Apps divider ── */}
         <div
