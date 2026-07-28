@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -849,16 +850,13 @@ export default function ProjectsPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '18px',
-                background: 'rgba(74, 222, 128, 0.08)',
+                overflow: 'hidden',
                 border: '1px solid rgba(74, 222, 128, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2.2rem',
                 flexShrink: 0,
+                position: 'relative',
               }}
             >
-              🏠
+              <Image src="/app-icons/care-restore.png" alt="Care & Restore" fill sizes="80px" />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
@@ -929,16 +927,13 @@ export default function ProjectsPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '18px',
-                background: 'rgba(56, 189, 248, 0.08)',
+                overflow: 'hidden',
                 border: '1px solid rgba(56, 189, 248, 0.2)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2.2rem',
                 flexShrink: 0,
+                position: 'relative',
               }}
             >
-              🚗
+              <Image src="/app-icons/blackice-mobile.png" alt="Black Ice Mobile Detailing" fill sizes="80px" />
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div
