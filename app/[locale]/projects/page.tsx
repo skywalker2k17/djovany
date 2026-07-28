@@ -96,7 +96,8 @@ const PROJECTS: Project[] = [
     },
     category: 'healthcare',
     tags: ['Next.js', 'TypeScript', 'Supabase'],
-    status: 'development',
+    url: 'https://carerestorehomecare.com',
+    status: 'live',
   },
   {
     slug: 'prime-home-care',
@@ -796,6 +797,86 @@ export default function ProjectsPage() {
                   ? 'Suivi de dates d\'expiration avec alertes intelligentes et scan de produits.'
                   : 'Track expiration dates with smart alerts and product scanning.'}
               </p>
+            </div>
+          </div>
+
+          {/* Care & Restore App */}
+          <div
+            className="card-border"
+            style={{
+              background: 'var(--bg-2)',
+              borderRadius: '16px',
+              padding: '28px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '24px',
+            }}
+          >
+            <div
+              style={{
+                width: '80px',
+                height: '80px',
+                borderRadius: '18px',
+                background: 'rgba(74, 222, 128, 0.08)',
+                border: '1px solid rgba(74, 222, 128, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '2.2rem',
+                flexShrink: 0,
+              }}
+            >
+              🏠
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                  color: '#4ADE80',
+                  marginBottom: '5px',
+                }}
+              >
+                {isFr ? 'Santé · Disponible' : 'Healthcare · Available'}
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                  margin: '0 0 6px',
+                }}
+              >
+                Care & Restore
+              </h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', margin: '0 0 18px', lineHeight: 1.55 }}>
+                {isFr
+                  ? 'App companion pour soignants et patients. Visites, EVV et suivi en temps réel.'
+                  : 'Companion app for caregivers and patients. Visits, EVV and real-time tracking.'}
+              </p>
+              <Link
+                href="https://apps.apple.com/us/app/care-restore/id6788793816"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(74, 222, 128, 0.1)',
+                  color: '#4ADE80',
+                  border: '1px solid rgba(74, 222, 128, 0.3)',
+                  padding: '8px 18px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  fontFamily: 'Inter, sans-serif',
+                }}
+              >
+                App Store ↗
+              </Link>
             </div>
           </div>
 
