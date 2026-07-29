@@ -5,6 +5,7 @@ const handleProxy = createMiddleware({
   locales,
   defaultLocale,
   localePrefix: 'always',
+  localeDetection: false,
 });
 
 export default function proxy(request: Parameters<typeof handleProxy>[0]) {
