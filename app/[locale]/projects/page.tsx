@@ -409,8 +409,33 @@ export default function ProjectsPage() {
       })
     : byCategory;
 
+  const APPS = [
+    { name: 'StockEasy', category: isFr ? 'Productivité' : 'Productivity' },
+    { name: 'ExpiTracker', category: isFr ? 'Utilitaire' : 'Utility' },
+    { name: 'Care & Restore', category: isFr ? 'Santé' : 'Healthcare' },
+    { name: 'Black Ice Mobile App', category: isFr ? 'Business' : 'Business' },
+    { name: 'MoneyTrack', category: isFr ? 'Finance' : 'Finance' },
+  ];
+  const appMatches = (name: string) => !query || name.toLowerCase().includes(query);
+  const matchingApps = query ? APPS.filter((a) => appMatches(a.name)) : [];
+
   const suggestions = query
-    ? PROJECTS.filter((p) => p.title.toLowerCase().includes(query)).slice(0, 6)
+    ? [
+        ...PROJECTS.filter((p) => p.title.toLowerCase().includes(query)).map((p) => ({
+          key: p.slug,
+          title: p.title,
+          icon: CAT_ICONS[p.category] || '🌐',
+          color: CAT_COLORS[p.category] || 'var(--accent)',
+          label: p.category,
+        })),
+        ...matchingApps.map((a) => ({
+          key: a.name,
+          title: a.name,
+          icon: '📱',
+          color: 'var(--accent)',
+          label: isFr ? 'App' : 'App',
+        })),
+      ].slice(0, 6)
     : [];
 
   const INITIAL_COUNT = 6;
@@ -530,10 +555,10 @@ export default function ProjectsPage() {
                 boxShadow: '0 12px 32px rgba(0,0,0,0.35)',
               }}
             >
-              {suggestions.map((p) => (
+              {suggestions.map((s) => (
                 <button
-                  key={p.slug}
-                  onMouseDown={() => { setSearch(p.title); setShowSuggestions(false); setShowAll(false); }}
+                  key={s.key}
+                  onMouseDown={() => { setSearch(s.title); setShowSuggestions(false); setShowAll(false); }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -550,17 +575,17 @@ export default function ProjectsPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  <span style={{ fontSize: '1rem' }}>{CAT_ICONS[p.category] || '🌐'}</span>
-                  <span style={{ flex: 1 }}>{p.title}</span>
+                  <span style={{ fontSize: '1rem' }}>{s.icon}</span>
+                  <span style={{ flex: 1 }}>{s.title}</span>
                   <span
                     style={{
                       fontSize: '0.6rem',
-                      color: CAT_COLORS[p.category] || 'var(--accent)',
+                      color: s.color,
                       textTransform: 'uppercase',
                       letterSpacing: '0.08em',
                     }}
                   >
-                    {p.category}
+                    {s.label}
                   </span>
                 </button>
               ))}
@@ -811,6 +836,7 @@ export default function ProjectsPage() {
         {!hasMore && <div style={{ marginBottom: '96px' }} />}
 
         {/* ── Apps divider ── */}
+        {(!query || matchingApps.length > 0) && (
         <div
           style={{
             display: 'flex',
@@ -835,13 +861,16 @@ export default function ProjectsPage() {
           </span>
           <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
         </div>
+        )}
 
         {/* ── Apps Grid ── */}
+        {(!query || matchingApps.length > 0) && (
         <div
           style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', marginBottom: '80px' }}
           className="apps-2col-grid"
         >
           {/* StockEasy */}
+          {appMatches('StockEasy') && (
           <div
             className="card-border"
             style={{
@@ -896,8 +925,10 @@ export default function ProjectsPage() {
               </p>
             </div>
           </div>
+          )}
 
           {/* ExpiTracker */}
+          {appMatches('ExpiTracker') && (
           <div
             className="card-border"
             style={{
@@ -952,8 +983,10 @@ export default function ProjectsPage() {
               </p>
             </div>
           </div>
+          )}
 
           {/* Care & Restore App */}
+          {appMatches('Care & Restore') && (
           <div
             className="card-border"
             style={{
@@ -1029,8 +1062,10 @@ export default function ProjectsPage() {
               </Link>
             </div>
           </div>
+          )}
 
           {/* Black Ice Mobile App */}
+          {appMatches('Black Ice Mobile App') && (
           <div
             className="card-border"
             style={{
@@ -1106,8 +1141,10 @@ export default function ProjectsPage() {
               </Link>
             </div>
           </div>
+          )}
 
           {/* MoneyTrack */}
+          {appMatches('MoneyTrack') && (
           <div
             className="card-border"
             style={{
@@ -1162,8 +1199,10 @@ export default function ProjectsPage() {
               </p>
             </div>
           </div>
+          )}
 
           {/* Coming soon */}
+          {!query && (
           <div
             className="card-border"
             style={{
@@ -1220,7 +1259,9 @@ export default function ProjectsPage() {
               </p>
             </div>
           </div>
+          )}
         </div>
+        )}
 
         {/* ── CTA ── */}
         <div
