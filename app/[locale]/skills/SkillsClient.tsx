@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { smartMatch } from '@/lib/searchMatch';
 
 type FilterCat = 'all' | 'web' | 'marketing' | 'tech' | 'security';
 
@@ -174,6 +175,8 @@ export default function SkillsClient() {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [charIdx, setCharIdx] = useState(0);
+  const [search, setSearch] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     const lang = isFr ? 'fr' : 'en';
@@ -201,7 +204,15 @@ export default function SkillsClient() {
     return () => clearTimeout(timeout);
   }, [charIdx, isDeleting, typingIdx, isFr]);
 
-  const filtered = filter === 'all' ? SKILLS : SKILLS.filter((s) => s.category === filter);
+  const byCategory = filter === 'all' ? SKILLS : SKILLS.filter((s) => s.category === filter);
+  const query = search.trim();
+  const skillHaystack = (s: Skill) =>
+    [s.title.fr, s.title.en, s.tags.fr, s.tags.en, s.desc.fr, s.desc.en, s.category].join(' ');
+  const filtered = query ? byCategory.filter((s) => smartMatch(query, skillHaystack(s))) : byCategory;
+
+  const suggestions = query
+    ? SKILLS.filter((s) => smartMatch(query, skillHaystack(s))).slice(0, 6)
+    : [];
 
   return (
     <section style={{ padding: '120px 24px 80px' }}>
@@ -246,6 +257,113 @@ export default function SkillsClient() {
             }}
           />
         </h1>
+
+        {/* ── Search ── */}
+        <div style={{ position: 'relative', maxWidth: '480px', marginBottom: '24px' }}>
+          <span
+            style={{
+              position: 'absolute',
+              left: '18px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'var(--text-muted)',
+              fontSize: '0.9rem',
+              pointerEvents: 'none',
+            }}
+          >
+            🔍
+          </span>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setShowSuggestions(true); }}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+            placeholder={isFr ? 'Rechercher une compétence...' : 'Search a skill...'}
+            style={{
+              width: '100%',
+              padding: '13px 18px 13px 44px',
+              borderRadius: '100px',
+              border: '1px solid var(--border)',
+              background: 'var(--bg-2)',
+              color: 'var(--text)',
+              fontSize: '0.88rem',
+              fontFamily: 'Inter, sans-serif',
+              outline: 'none',
+            }}
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              aria-label={isFr ? 'Effacer' : 'Clear'}
+              style={{
+                position: 'absolute',
+                right: '14px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+              }}
+            >
+              ✕
+            </button>
+          )}
+
+          {showSuggestions && suggestions.length > 0 && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 8px)',
+                left: 0,
+                right: 0,
+                background: 'var(--bg-2)',
+                border: '1px solid var(--border)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                zIndex: 20,
+                boxShadow: '0 12px 32px rgba(0,0,0,0.35)',
+              }}
+            >
+              {suggestions.map((s) => (
+                <button
+                  key={s.title.en}
+                  onMouseDown={() => { setSearch(s.title[isFr ? 'fr' : 'en']); setShowSuggestions(false); }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    width: '100%',
+                    padding: '10px 16px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid var(--border)',
+                    color: 'var(--text)',
+                    fontSize: '0.82rem',
+                    fontFamily: 'Inter, sans-serif',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span style={{ fontSize: '1rem' }}>{s.icon}</span>
+                  <span style={{ flex: 1 }}>{s.title[isFr ? 'fr' : 'en']}</span>
+                  <span
+                    style={{
+                      fontSize: '0.6rem',
+                      color: 'var(--accent)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {s.category}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* ── Filter Buttons ── */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '48px' }}>

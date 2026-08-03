@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { smartMatch } from '@/lib/searchMatch';
 
 type FilterCat = 'all' | 'web' | 'marketing' | 'support';
 
@@ -163,22 +164,13 @@ export default function ServicesClient() {
   }, [charIdx, isDeleting, typingIdx, isFr]);
 
   const byCategory = filter === 'all' ? SERVICES : SERVICES.filter((s) => s.category === filter);
-  const query = search.trim().toLowerCase();
-  const filtered = query
-    ? byCategory.filter((s) => {
-        const title = s.title[isFr ? 'fr' : 'en'];
-        const desc = s.desc[isFr ? 'fr' : 'en'];
-        return (
-          title.toLowerCase().includes(query) ||
-          desc.toLowerCase().includes(query) ||
-          s.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-          s.category.toLowerCase().includes(query)
-        );
-      })
-    : byCategory;
+  const query = search.trim();
+  const serviceHaystack = (s: Service) =>
+    [s.title.fr, s.title.en, s.desc.fr, s.desc.en, ...s.tags, s.category].join(' ');
+  const filtered = query ? byCategory.filter((s) => smartMatch(query, serviceHaystack(s))) : byCategory;
 
   const suggestions = query
-    ? SERVICES.filter((s) => s.title[isFr ? 'fr' : 'en'].toLowerCase().includes(query)).slice(0, 6)
+    ? SERVICES.filter((s) => smartMatch(query, serviceHaystack(s))).slice(0, 6)
     : [];
 
   return (

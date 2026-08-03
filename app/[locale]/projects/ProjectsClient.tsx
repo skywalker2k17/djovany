@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { smartMatch } from '@/lib/searchMatch';
 
 type FilterCat =
   | 'all' | 'saas' | 'healthcare' | 'security' | 'ecommerce'
@@ -397,18 +398,10 @@ export default function ProjectsClient() {
   }, [charIdx, isDeleting, typingIdx, isFr]);
 
   const byCategory = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
-  const query = search.trim().toLowerCase();
-  const filtered = query
-    ? byCategory.filter((p) => {
-        const desc = isFr ? p.desc.fr : p.desc.en;
-        return (
-          p.title.toLowerCase().includes(query) ||
-          desc.toLowerCase().includes(query) ||
-          p.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-          p.category.toLowerCase().includes(query)
-        );
-      })
-    : byCategory;
+  const query = search.trim();
+  const projectHaystack = (p: Project) =>
+    [p.title, p.desc.fr, p.desc.en, ...p.tags, p.category].join(' ');
+  const filtered = query ? byCategory.filter((p) => smartMatch(query, projectHaystack(p))) : byCategory;
 
   const APPS = [
     { name: 'StockEasy', category: isFr ? 'Productivité' : 'Productivity' },
@@ -417,12 +410,12 @@ export default function ProjectsClient() {
     { name: 'Black Ice Mobile App', category: isFr ? 'Business' : 'Business' },
     { name: 'MoneyTrack', category: isFr ? 'Finance' : 'Finance' },
   ];
-  const appMatches = (name: string) => !query || name.toLowerCase().includes(query);
+  const appMatches = (name: string) => !query || smartMatch(query, `${name} ${APPS.find((a) => a.name === name)?.category ?? ''}`);
   const matchingApps = query ? APPS.filter((a) => appMatches(a.name)) : [];
 
   const suggestions = query
     ? [
-        ...PROJECTS.filter((p) => p.title.toLowerCase().includes(query)).map((p) => ({
+        ...PROJECTS.filter((p) => smartMatch(query, projectHaystack(p))).map((p) => ({
           key: p.slug,
           title: p.title,
           icon: CAT_ICONS[p.category] || '🌐',
