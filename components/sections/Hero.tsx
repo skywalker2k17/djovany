@@ -141,6 +141,27 @@ export default function Hero({ locale }: { locale: string }) {
               </Link>
 
               <Link
+                href={`/${locale}/start`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  border: '1px solid var(--accent)',
+                  color: 'var(--accent)',
+                  padding: '12px 28px',
+                  borderRadius: '6px',
+                  fontWeight: 600,
+                  fontSize: '0.9rem',
+                  textDecoration: 'none',
+                  fontFamily: 'Inter, sans-serif',
+                  transition: 'background 0.2s',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {t('cta_start')} →
+              </Link>
+
+              <Link
                 href={`/${locale}/contact`}
                 style={{
                   display: 'inline-flex',

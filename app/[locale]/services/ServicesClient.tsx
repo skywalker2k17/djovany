@@ -5,123 +5,12 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { smartMatch } from '@/lib/searchMatch';
-
-type FilterCat = 'all' | 'web' | 'marketing' | 'support';
-
-const FILTERS: { id: FilterCat; fr: string; en: string }[] = [
-  { id: 'all', fr: 'Tout voir', en: 'All Services' },
-  { id: 'web', fr: 'Web & Dev', en: 'Web & Dev' },
-  { id: 'marketing', fr: 'Marketing', en: 'Marketing' },
-  { id: 'support', fr: 'Support Tech', en: 'Tech Support' },
-];
+import { SERVICES, FILTERS, type Service, type FilterCat } from '@/lib/services';
 
 const TYPING_PHRASES: Record<'fr' | 'en', string[]> = {
   fr: ['votre croissance digitale.', 'votre vision créative.', 'vos besoins techniques.', 'votre transformation numérique.'],
   en: ['your digital growth.', 'your creative vision.', 'your technical needs.', 'your digital transformation.'],
 };
-
-interface Service {
-  icon: string;
-  title: { fr: string; en: string };
-  desc: { fr: string; en: string };
-  tags: string[];
-  category: Exclude<FilterCat, 'all'>;
-  popular?: boolean;
-}
-
-const SERVICES: Service[] = [
-  {
-    icon: '⬡',
-    title: { fr: 'Développement SaaS', en: 'SaaS Development' },
-    desc: {
-      fr: 'Plateformes SaaS complètes — architecture Turborepo, auth Supabase, paiements MonCash / Stripe, dashboard admin.',
-      en: 'Complete SaaS platforms — Turborepo architecture, Supabase auth, MonCash / Stripe payments, admin dashboard.',
-    },
-    tags: ['Next.js', 'Supabase', 'TypeScript', 'Turborepo'],
-    category: 'web',
-    popular: true,
-  },
-  {
-    icon: '◈',
-    title: { fr: 'Site Web & Landing Page', en: 'Website & Landing Page' },
-    desc: {
-      fr: 'Sites rapides, SEO-optimisés, mobile-first. De la landing page au site multi-pages avec CMS intégré.',
-      en: 'Fast, SEO-optimized, mobile-first sites. From landing pages to multi-page sites with integrated CMS.',
-    },
-    tags: ['Next.js', 'WordPress', 'Tailwind CSS', 'SEO'],
-    category: 'web',
-  },
-  {
-    icon: '◉',
-    title: { fr: 'Application Mobile', en: 'Mobile App' },
-    desc: {
-      fr: 'Apps React Native / Expo pour iOS et Android. AdMob, push notifications, publication App Store & Play Store.',
-      en: 'React Native / Expo apps for iOS and Android. AdMob, push notifications, App Store & Play Store publishing.',
-    },
-    tags: ['React Native', 'Expo', 'iOS', 'Android'],
-    category: 'web',
-  },
-  {
-    icon: '📈',
-    title: { fr: 'SEO & Marketing Digital', en: 'SEO & Digital Marketing' },
-    desc: {
-      fr: 'Référencement naturel, Google Ads, Facebook Ads et gestion des réseaux sociaux. Stratégie complète pour votre croissance.',
-      en: 'SEO, Google Ads, Facebook Ads and social media management. Complete strategy for your growth.',
-    },
-    tags: ['SEO', 'Google Ads', 'Facebook Ads', 'Analytics'],
-    category: 'marketing',
-  },
-  {
-    icon: '🎵',
-    title: { fr: 'Technologie Musicale & Droits', en: 'Music Tech & Rights' },
-    desc: {
-      fr: 'Distribution numérique, protection des droits d\'auteur, collecte de royalties et stratégie de promotion artistique.',
-      en: 'Digital distribution, copyright protection, royalty collection and artistic promotion strategy.',
-    },
-    tags: ['Distribution', 'Copyright', 'Royalties', 'Promotion'],
-    category: 'marketing',
-  },
-  {
-    icon: '🖥️',
-    title: { fr: 'Maintenance & Support', en: 'Maintenance & Support' },
-    desc: {
-      fr: 'Optimisation PC, suppression de virus, mises à jour logicielles et monitoring mensuel de vos projets web.',
-      en: 'PC optimization, virus removal, software updates and monthly monitoring of your web projects.',
-    },
-    tags: ['Monitoring', 'Optimization', 'Updates', 'Performance'],
-    category: 'support',
-  },
-  {
-    icon: '🔒',
-    title: { fr: 'Cybersécurité', en: 'Cybersecurity' },
-    desc: {
-      fr: 'Audits de sécurité, suppression de malware, tests de pénétration et formation à la sécurité informatique.',
-      en: 'Security audits, malware removal, penetration testing and cybersecurity training.',
-    },
-    tags: ['Pentesting', 'Audit', 'Malware', 'Training'],
-    category: 'support',
-  },
-  {
-    icon: '🔑',
-    title: { fr: 'Récupération de Compte', en: 'Account Recovery' },
-    desc: {
-      fr: 'Récupération de comptes email, réseaux sociaux et plateformes piratés ou verrouillés. Mise en place d\'une sécurité renforcée.',
-      en: 'Recovery of hacked or locked email, social media and platform accounts. Enhanced security setup.',
-    },
-    tags: ['Email', 'Social Media', '2FA', 'Security'],
-    category: 'support',
-  },
-  {
-    icon: '📲',
-    title: { fr: 'Réparation Téléphone', en: 'Phone Repair' },
-    desc: {
-      fr: 'Diagnostic logiciel et hardware, récupération de données, mise à jour firmware et optimisation des performances.',
-      en: 'Software and hardware diagnostics, data recovery, firmware updates and performance optimization.',
-    },
-    tags: ['Diagnostic', 'Data Recovery', 'Firmware', 'Performance'],
-    category: 'support',
-  },
-];
 
 export default function ServicesClient() {
   const t = useTranslations('services');
@@ -166,7 +55,7 @@ export default function ServicesClient() {
   const byCategory = filter === 'all' ? SERVICES : SERVICES.filter((s) => s.category === filter);
   const query = search.trim();
   const serviceHaystack = (s: Service) =>
-    [s.title.fr, s.title.en, s.desc.fr, s.desc.en, ...s.tags, s.category].join(' ');
+    [s.title.fr, s.title.en, s.desc.fr, s.desc.en, s.plain?.fr ?? '', s.plain?.en ?? '', ...s.tags, s.category].join(' ');
   const filtered = query ? byCategory.filter((s) => smartMatch(query, serviceHaystack(s))) : byCategory;
 
   const suggestions = query
@@ -369,6 +258,7 @@ export default function ServicesClient() {
           {filtered.map((service) => {
             const title = service.title[isFr ? 'fr' : 'en'];
             const desc = service.desc[isFr ? 'fr' : 'en'];
+            const plain = service.plain?.[isFr ? 'fr' : 'en'];
 
             return (
               <div
@@ -441,6 +331,19 @@ export default function ServicesClient() {
                   >
                     {title}
                   </h3>
+                  {plain && (
+                    <p
+                      style={{
+                        color: 'var(--text)',
+                        fontSize: '0.9rem',
+                        lineHeight: 1.6,
+                        margin: '0 0 6px',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {plain}
+                    </p>
+                  )}
                   <p
                     style={{
                       color: 'var(--text-muted)',

@@ -18,6 +18,7 @@ export default function Navbar({ locale }: { locale: string }) {
     { href: `/${locale}/projects`, label: t('projects') },
     { href: `/${locale}/skills`, label: t('skills') },
     { href: `/${locale}/services`, label: t('services') },
+    { href: `/${locale}/start`, label: t('start') },
     { href: `/${locale}/contact`, label: t('contact') },
   ];
 

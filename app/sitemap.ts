@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { locales } from '@/i18n';
 
 const BASE_URL = 'https://djovanylevasseur.com';
-const ROUTES = ['', '/projects', '/services', '/skills', '/contact'];
+const ROUTES = ['', '/projects', '/services', '/skills', '/start', '/contact'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

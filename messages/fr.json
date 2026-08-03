@@ -4,6 +4,7 @@
     "projects": "Projets",
     "skills": "Compétences",
     "services": "Services",
+    "start": "Démarrer",
     "contact": "Contact",
     "toggle_menu": "Ouvrir le menu"
   },
@@ -13,6 +14,7 @@
     "headline_rotating": ["fonctionnent vraiment.", "scalent.", "convertissent.", "impressionnent."],
     "sub": "Next.js · TypeScript · Supabase · React Native — des landing pages aux plateformes SaaS complètes.",
     "cta_projects": "Voir mes projets",
+    "cta_start": "Démarrer un projet",
     "cta_contact": "Me contacter"
   },
   "about": {
