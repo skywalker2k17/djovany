@@ -351,7 +351,8 @@ const PROJECTS: Project[] = [
     },
     category: 'music',
     tags: ['Next.js', 'TypeScript', 'PWA'],
-    status: 'development',
+    url: 'https://chedyebebe.com',
+    status: 'live',
   },
 ];
 
