@@ -5,14 +5,14 @@ const BASE_URL = 'https://djovanylevasseur.com';
 
 const META = {
   fr: {
-    title: 'Services',
+    title: 'Services — Développement Web & SaaS pour Haïti, la Floride et les USA',
     description:
-      'Développement web, SaaS, marketing digital et support technique par Djovany Levasseur.',
+      'Développement web, SaaS, marketing digital et support technique freelance, à distance pour la diaspora haïtienne et les entreprises en Floride/USA.',
   },
   en: {
-    title: 'Services',
+    title: 'Services — Web & SaaS Development for Haiti, Florida & the USA',
     description:
-      'Web development, SaaS, digital marketing and tech support by Djovany Levasseur.',
+      'Freelance web development, SaaS, digital marketing and tech support, remote-friendly for the Haitian diaspora and businesses across Florida/USA.',
   },
 };
 

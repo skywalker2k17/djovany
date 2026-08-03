@@ -5,14 +5,14 @@ const BASE_URL = 'https://djovanylevasseur.com';
 
 const META = {
   fr: {
-    title: 'Projets',
+    title: 'Projets — SaaS, E-commerce & Apps pour la diaspora haïtienne et les USA',
     description:
-      'Découvrez les projets web, SaaS et apps mobiles réalisés par Djovany Levasseur : Next.js, TypeScript, Supabase, React Native.',
+      'Portfolio de projets web, SaaS et apps mobiles : tracking de colis Haïti-USA, santé à domicile, e-commerce, sécurité et plus. Next.js, TypeScript, Supabase, React Native.',
   },
   en: {
-    title: 'Projects',
+    title: 'Projects — SaaS, E-commerce & Apps for the Haitian Diaspora and USA',
     description:
-      'Explore the web, SaaS and mobile app projects built by Djovany Levasseur: Next.js, TypeScript, Supabase, React Native.',
+      'Portfolio of web, SaaS and mobile app projects: Haiti-USA package tracking, home healthcare, e-commerce, security and more. Built with Next.js, TypeScript, Supabase, React Native.',
   },
 };
 

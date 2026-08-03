@@ -5,14 +5,14 @@ const BASE_URL = 'https://djovanylevasseur.com';
 
 const META = {
   fr: {
-    title: 'Compétences',
+    title: 'Compétences — Développeur Full-Stack Next.js, TypeScript & React Native',
     description:
-      'Les compétences techniques de Djovany Levasseur : développement web, marketing, mobile et sécurité.',
+      'Compétences techniques de Djovany Levasseur : développement web, SaaS, marketing digital, mobile et sécurité. Next.js, TypeScript, Supabase, React Native.',
   },
   en: {
-    title: 'Skills',
+    title: 'Skills — Full-Stack Developer, Next.js, TypeScript & React Native',
     description:
-      "Djovany Levasseur's technical skills: web development, marketing, mobile and security.",
+      "Djovany Levasseur's technical skills: web development, SaaS, digital marketing, mobile and security. Next.js, TypeScript, Supabase, React Native.",
   },
 };
 

@@ -9,14 +9,14 @@ const BASE_URL = 'https://djovanylevasseur.com';
 
 const META = {
   fr: {
-    title: 'Djovany Levasseur — Développeur Full-Stack',
+    title: 'Djovany Levasseur — Développeur Full-Stack | Haïti, USA & International',
     description:
-      'Développeur Full-Stack & Designer freelance. Sites web, SaaS et apps mobiles avec Next.js, TypeScript, Supabase et React Native.',
+      'Développeur Full-Stack freelance pour la diaspora haïtienne et les entreprises en Floride/USA. Sites web, SaaS et applications mobiles avec Next.js, TypeScript, Supabase et React Native.',
   },
   en: {
-    title: 'Djovany Levasseur — Full-Stack Developer',
+    title: 'Djovany Levasseur — Full-Stack Developer | Haiti, USA & Worldwide',
     description:
-      'Freelance Full-Stack Developer & Designer. Websites, SaaS and mobile apps built with Next.js, TypeScript, Supabase and React Native.',
+      'Freelance Full-Stack Developer for the Haitian diaspora and businesses across Florida/USA. Websites, SaaS platforms and mobile apps built with Next.js, TypeScript, Supabase and React Native.',
   },
 };
 
@@ -66,7 +66,23 @@ export default async function HomePage({
     url: BASE_URL,
     image: `${BASE_URL}/djovany.png`,
     jobTitle: 'Full-Stack Developer',
-    knowsAbout: ['Next.js', 'TypeScript', 'Supabase', 'React Native'],
+    description:
+      'Freelance Full-Stack Developer building websites, SaaS platforms and mobile apps for the Haitian diaspora and businesses across Florida, the USA and worldwide.',
+    knowsAbout: [
+      'Next.js', 'TypeScript', 'Supabase', 'React Native',
+      'Web Development', 'SaaS Development', 'Mobile App Development',
+    ],
+    knowsLanguage: ['fr', 'en', 'ht'],
+    areaServed: [
+      { '@type': 'Country', name: 'United States' },
+      { '@type': 'Country', name: 'Haiti' },
+      { '@type': 'State', name: 'Florida' },
+      { '@type': 'Place', name: 'Worldwide (remote)' },
+    ],
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Djovany Levasseur — Freelance Development',
+    },
     sameAs: [],
   };
 

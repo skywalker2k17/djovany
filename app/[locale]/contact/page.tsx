@@ -5,14 +5,14 @@ const BASE_URL = 'https://djovanylevasseur.com';
 
 const META = {
   fr: {
-    title: 'Contact',
+    title: 'Contact — Développeur Web Freelance pour Haïti, la Floride et les USA',
     description:
-      'Contactez Djovany Levasseur pour discuter de votre projet web, SaaS ou application mobile.',
+      'Contactez Djovany Levasseur pour discuter de votre projet web, SaaS ou application mobile, où que vous soyez : Haïti, Floride, USA ou ailleurs.',
   },
   en: {
-    title: 'Contact',
+    title: 'Contact — Freelance Web Developer for Haiti, Florida & the USA',
     description:
-      "Get in touch with Djovany Levasseur to discuss your web, SaaS or mobile app project.",
+      'Get in touch with Djovany Levasseur to discuss your web, SaaS or mobile app project, wherever you are: Haiti, Florida, USA or worldwide.',
   },
 };
 
