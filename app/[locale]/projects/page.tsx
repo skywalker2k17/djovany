@@ -366,6 +366,8 @@ export default function ProjectsPage() {
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [charIdx, setCharIdx] = useState(0);
+  const [search, setSearch] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
     const lang = isFr ? 'fr' : 'en';
@@ -393,7 +395,24 @@ export default function ProjectsPage() {
     return () => clearTimeout(timeout);
   }, [charIdx, isDeleting, typingIdx, isFr]);
 
-  const filtered = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+  const byCategory = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+  const query = search.trim().toLowerCase();
+  const filtered = query
+    ? byCategory.filter((p) => {
+        const desc = isFr ? p.desc.fr : p.desc.en;
+        return (
+          p.title.toLowerCase().includes(query) ||
+          desc.toLowerCase().includes(query) ||
+          p.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+          p.category.toLowerCase().includes(query)
+        );
+      })
+    : byCategory;
+
+  const suggestions = query
+    ? PROJECTS.filter((p) => p.title.toLowerCase().includes(query)).slice(0, 6)
+    : [];
+
   const INITIAL_COUNT = 6;
   const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
   const hasMore = filtered.length > INITIAL_COUNT;
@@ -441,6 +460,113 @@ export default function ProjectsPage() {
             }}
           />
         </h1>
+
+        {/* ── Search ── */}
+        <div style={{ position: 'relative', maxWidth: '480px', marginBottom: '24px' }}>
+          <span
+            style={{
+              position: 'absolute',
+              left: '18px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: 'var(--text-muted)',
+              fontSize: '0.9rem',
+              pointerEvents: 'none',
+            }}
+          >
+            🔍
+          </span>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setShowAll(false); setShowSuggestions(true); }}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+            placeholder={isFr ? 'Rechercher un projet, une techno...' : 'Search a project, a tech...'}
+            style={{
+              width: '100%',
+              padding: '13px 18px 13px 44px',
+              borderRadius: '100px',
+              border: '1px solid var(--border)',
+              background: 'var(--bg-2)',
+              color: 'var(--text)',
+              fontSize: '0.88rem',
+              fontFamily: 'Inter, sans-serif',
+              outline: 'none',
+            }}
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              aria-label={isFr ? 'Effacer' : 'Clear'}
+              style={{
+                position: 'absolute',
+                right: '14px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+              }}
+            >
+              ✕
+            </button>
+          )}
+
+          {showSuggestions && suggestions.length > 0 && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 8px)',
+                left: 0,
+                right: 0,
+                background: 'var(--bg-2)',
+                border: '1px solid var(--border)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                zIndex: 20,
+                boxShadow: '0 12px 32px rgba(0,0,0,0.35)',
+              }}
+            >
+              {suggestions.map((p) => (
+                <button
+                  key={p.slug}
+                  onMouseDown={() => { setSearch(p.title); setShowSuggestions(false); setShowAll(false); }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    width: '100%',
+                    padding: '10px 16px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid var(--border)',
+                    color: 'var(--text)',
+                    fontSize: '0.82rem',
+                    fontFamily: 'Inter, sans-serif',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span style={{ fontSize: '1rem' }}>{CAT_ICONS[p.category] || '🌐'}</span>
+                  <span style={{ flex: 1 }}>{p.title}</span>
+                  <span
+                    style={{
+                      fontSize: '0.6rem',
+                      color: CAT_COLORS[p.category] || 'var(--accent)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {p.category}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* ── Filters ── */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '48px' }}>
