@@ -416,7 +416,7 @@ export default function ServicesClient() {
             </div>
           </div>
           <Link
-            href={`/${locale}/contact`}
+            href={`/${locale}/start`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -433,7 +433,7 @@ export default function ServicesClient() {
               whiteSpace: 'nowrap',
             }}
           >
-            {isFr ? 'Me contacter' : 'Contact me'} →
+            {isFr ? 'Démarrer' : 'Get started'} →
           </Link>
         </div>
 
@@ -474,7 +474,7 @@ export default function ServicesClient() {
               : "Let's talk about it. Guaranteed reply within 24h."}
           </p>
           <Link
-            href={`/${locale}/contact`}
+            href={`/${locale}/start`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -490,7 +490,7 @@ export default function ServicesClient() {
               letterSpacing: '-0.01em',
             }}
           >
-            {isFr ? 'Me contacter' : 'Get in touch'} →
+            {isFr ? 'Démarrer mon projet' : 'Start my project'} →
           </Link>
         </div>
       </div>

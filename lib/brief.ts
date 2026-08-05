@@ -43,10 +43,17 @@ export const TRACKS: { id: TrackId; label: L; hint: L }[] = [
 ];
 
 export type Field =
-  | { kind: 'text'; id: string; label: L; placeholder?: L }
-  | { kind: 'area'; id: string; label: L; placeholder?: L }
-  | { kind: 'choice'; id: string; label: L; options: L[] }
-  | { kind: 'multi'; id: string; label: L; options: L[] }
+  | {
+      kind: 'text';
+      id: string;
+      label: L;
+      placeholder?: L;
+      required?: boolean;
+      validate?: 'email' | 'phone';
+    }
+  | { kind: 'area'; id: string; label: L; placeholder?: L; required?: boolean }
+  | { kind: 'choice'; id: string; label: L; options: L[]; required?: boolean }
+  | { kind: 'multi'; id: string; label: L; options: L[]; required?: boolean }
   | { kind: 'note'; id: string; label: L };
 
 export interface Section {
@@ -446,9 +453,23 @@ export const SECTIONS: Section[] = [
 ];
 
 export const CONTACT_FIELDS: Field[] = [
-  { kind: 'text', id: 'name', label: { fr: 'Votre nom', en: 'Your name' } },
-  { kind: 'text', id: 'email', label: { fr: 'Email', en: 'Email' } },
-  { kind: 'text', id: 'phone', label: { fr: 'Téléphone ou WhatsApp', en: 'Phone or WhatsApp' } },
+  { kind: 'text', id: 'name', label: { fr: 'Votre nom', en: 'Your name' }, required: true },
+  {
+    kind: 'text',
+    id: 'email',
+    label: { fr: 'Email', en: 'Email' },
+    placeholder: { fr: 'nom@entreprise.com', en: 'name@company.com' },
+    required: true,
+    validate: 'email',
+  },
+  {
+    kind: 'text',
+    id: 'phone',
+    label: { fr: 'Téléphone ou WhatsApp', en: 'Phone or WhatsApp' },
+    placeholder: { fr: '+1 813 360 1760', en: '+1 813 360 1760' },
+    required: true,
+    validate: 'phone',
+  },
   {
     kind: 'choice',
     id: 'prefer',
@@ -484,4 +505,52 @@ export function sectionsFor(tracks: TrackId[]): Section[] {
   return SECTIONS.filter(
     (s) => s.requires.length === 0 || s.requires.some((r) => tracks.includes(r))
   );
+}
+
+/** Ids of the contact fields that must be filled before submitting. */
+export const REQUIRED_CONTACT_IDS = CONTACT_FIELDS.filter(
+  (f) => 'required' in f && f.required
+).map((f) => f.id);
+
+/* ------------------------------------------------------------------ */
+/* Validation — shared by the client form and the server action.       */
+/* Keep both sides using these, never trust the browser alone.         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Deliberately strict. Rejects "123", "abcdef", "a@b", trailing dots,
+ * consecutive dots, and anything without a real TLD.
+ */
+const EMAIL_RE =
+  /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/;
+
+export function isValidEmail(raw: string): boolean {
+  const v = raw.trim();
+  if (v.length < 6 || v.length > 254) return false;
+  if (v.includes('..')) return false;
+  const [local, domain] = v.split('@');
+  if (!local || !domain) return false;
+  if (local.length > 64) return false;
+  if (domain.startsWith('-') || domain.endsWith('-')) return false;
+  return EMAIL_RE.test(v);
+}
+
+/** Accepts +, digits, spaces, dots, dashes, parentheses. Needs 7 to 15 digits. */
+export function isValidPhone(raw: string): boolean {
+  const v = raw.trim();
+  if (!/^[+()\-.\s\d]+$/.test(v)) return false;
+  const digits = v.replace(/\D/g, '');
+  return digits.length >= 7 && digits.length <= 15;
+}
+
+/** Returns an error key, or null when the value passes. */
+export function fieldError(f: Field, raw: unknown): 'required' | 'email' | 'phone' | null {
+  const value = Array.isArray(raw) ? raw.join(',') : (raw ?? '').toString().trim();
+  const required = 'required' in f && f.required === true;
+
+  if (!value) return required ? 'required' : null;
+  if (!('validate' in f) || !f.validate) return null;
+  if (f.validate === 'email') return isValidEmail(value) ? null : 'email';
+  if (f.validate === 'phone') return isValidPhone(value) ? null : 'phone';
+  return null;
 }

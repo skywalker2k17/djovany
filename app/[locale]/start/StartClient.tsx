@@ -1,16 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useActionState, useMemo, useState, startTransition } from 'react';
 import { useParams } from 'next/navigation';
 import {
   TRACKS,
   CONTACT_FIELDS,
   sectionsFor,
+  fieldError,
   type Field,
   type TrackId,
   type L,
 } from '@/lib/brief';
+import { sendBrief, type BriefPayload, type SendResult } from '@/app/actions/sendBrief';
 
 const WHATSAPP = '50948449536';
 const EMAIL = 'djovanylevasseur93@gmail.com';
@@ -28,6 +30,30 @@ export default function StartClient() {
   const [step, setStep] = useState(0);
   const [done, setDone] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
+
+  const [sendState, submitBrief, sendPending] = useActionState<SendResult | null, BriefPayload>(
+    async (_prev, payload) => sendBrief(payload),
+    null
+  );
+
+  const errorFor = (f: Field) => fieldError(f, answers[f.id]);
+  const missing = CONTACT_FIELDS.filter((f) => errorFor(f) !== null);
+
+  const errorText = (key: 'required' | 'email' | 'phone') => {
+    if (key === 'email') {
+      return isFr
+        ? 'Entrez une adresse email valide, par exemple nom@entreprise.com'
+        : 'Enter a valid email address, for example name@company.com';
+    }
+    if (key === 'phone') {
+      return isFr
+        ? 'Entrez un numéro valide, entre 7 et 15 chiffres'
+        : 'Enter a valid number, between 7 and 15 digits';
+    }
+    return isFr ? 'Ce champ est obligatoire' : 'This field is required';
+  };
 
   const sections = useMemo(() => sectionsFor(tracks), [tracks]);
   const totalSteps = sections.length + 2;
@@ -91,9 +117,11 @@ export default function StartClient() {
   }, [briefBlocks, isFr]);
 
   const waHref = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(summary)}`;
-  const mailHref = `mailto:${EMAIL}?subject=${encodeURIComponent(
-    isFr ? 'Demande de projet' : 'Project request'
-  )}&body=${encodeURIComponent(summary)}`;
+
+  const submit = () => {
+    const payload: BriefPayload = { locale, tracks, answers, website: honeypot };
+    startTransition(() => submitBrief(payload));
+  };
 
   const copy = async () => {
     try {
@@ -161,15 +189,41 @@ export default function StartClient() {
     }
 
     const ph = 'placeholder' in f && f.placeholder ? say(f.placeholder) : '';
+    const isRequired = 'required' in f && f.required === true;
+    const err = errorFor(f);
+    const isMissing = showErrors && err !== null;
+    const inputType =
+      'validate' in f && f.validate === 'email'
+        ? 'email'
+        : 'validate' in f && f.validate === 'phone'
+          ? 'tel'
+          : 'text';
 
     return (
       <div key={f.id} style={{ marginBottom: '26px' }}>
-        <label style={labelStyle}>{say(f.label)}</label>
+        <label style={labelStyle}>
+          {say(f.label)}
+          {isRequired && (
+            <span style={{ color: 'var(--accent)', marginLeft: '4px' }} aria-hidden="true">
+              *
+            </span>
+          )}
+        </label>
 
         {f.kind === 'text' && (
           <input
-            type="text"
-            style={inputStyle}
+            type={inputType}
+            inputMode={inputType === 'tel' ? 'tel' : undefined}
+            autoComplete={
+              f.id === 'email' ? 'email' : f.id === 'phone' ? 'tel' : f.id === 'name' ? 'name' : undefined
+            }
+            required={isRequired}
+            aria-required={isRequired}
+            aria-invalid={isMissing}
+            style={{
+              ...inputStyle,
+              borderColor: isMissing ? '#ef4444' : 'var(--border)',
+            }}
             placeholder={ph}
             value={(answers[f.id] as string) ?? ''}
             onChange={(e) => setAnswer(f.id, e.target.value)}
@@ -207,6 +261,12 @@ export default function StartClient() {
             })}
           </div>
         )}
+
+        {isMissing && err && (
+          <p style={{ color: '#ef4444', fontSize: '0.78rem', marginTop: '7px' }}>
+            {errorText(err)}
+          </p>
+        )}
       </div>
     );
   };
@@ -231,16 +291,55 @@ export default function StartClient() {
           </h1>
           <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '32px' }}>
             {isFr
-              ? 'Envoyez-le par WhatsApp ou par email. Réponse sous 24h.'
-              : 'Send it by WhatsApp or email. Reply within 24h.'}
+              ? 'Envoyez-le directement, ou par WhatsApp. Réponse sous 24h.'
+              : 'Send it directly, or over WhatsApp. Reply within 24h.'}
           </p>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '32px' }}>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" style={btn(true)}>
+          {/* honeypot — hidden from sighted and screen-reader users, bots fill it */}
+          <input
+            type="text"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            aria-hidden="true"
+            autoComplete="off"
+            style={{
+              position: 'absolute',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden',
+              clip: 'rect(0 0 0 0)',
+              whiteSpace: 'nowrap',
+              left: '-9999px',
+            }}
+          />
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '16px' }}>
+            <button
+              type="button"
+              onClick={submit}
+              disabled={sendPending || sendState?.ok === true}
+              style={{
+                ...btn(true),
+                opacity: sendPending || sendState?.ok === true ? 0.6 : 1,
+                cursor: sendPending || sendState?.ok === true ? 'not-allowed' : 'pointer',
+              }}
+            >
+              {sendPending
+                ? isFr
+                  ? 'Envoi...'
+                  : 'Sending...'
+                : sendState?.ok === true
+                  ? isFr
+                    ? 'Envoyé ✓'
+                    : 'Sent ✓'
+                  : isFr
+                    ? 'Envoyer ma demande'
+                    : 'Send my request'}
+            </button>
+            <a href={waHref} target="_blank" rel="noopener noreferrer" style={btn(false)}>
               {isFr ? 'Envoyer par WhatsApp' : 'Send on WhatsApp'} →
-            </a>
-            <a href={mailHref} style={btn(false)}>
-              {isFr ? 'Envoyer par email' : 'Send by email'}
             </a>
             <button type="button" onClick={() => window.print()} style={btn(false)}>
               {isFr ? 'Télécharger en PDF' : 'Download as PDF'}
@@ -249,6 +348,32 @@ export default function StartClient() {
               {copied ? (isFr ? 'Copié' : 'Copied') : isFr ? 'Copier le texte' : 'Copy the text'}
             </button>
           </div>
+
+          {sendState?.ok === true && (
+            <p style={{ color: 'var(--accent)', fontSize: '0.85rem', marginBottom: '20px' }}>
+              {isFr
+                ? 'Votre demande est bien partie. Réponse sous 24h.'
+                : 'Your request is on its way. Reply within 24h.'}
+            </p>
+          )}
+
+          {sendState?.ok === false &&
+            (sendState.error === 'not_configured' || sendState.error === 'send_failed') && (
+              <p style={{ color: '#ef4444', fontSize: '0.85rem', marginBottom: '20px' }}>
+                {isFr
+                  ? 'Désolé, l’envoi direct a échoué pour l’instant. Utilisez WhatsApp ou copiez le texte ci-dessous, merci de votre patience.'
+                  : 'Sorry, the direct send failed for now. Please use WhatsApp or copy the text below, thanks for your patience.'}
+              </p>
+            )}
+
+          {sendState?.ok === false &&
+            (sendState.error === 'validation' || sendState.error === 'rejected') && (
+              <p style={{ color: '#ef4444', fontSize: '0.85rem', marginBottom: '20px' }}>
+                {isFr
+                  ? 'Quelque chose a bloqué l’envoi. Vérifiez vos réponses ou utilisez WhatsApp.'
+                  : 'Something blocked the send. Please check your answers or use WhatsApp.'}
+              </p>
+            )}
 
           <p style={{ color: 'var(--text-dim)', fontSize: '0.78rem', marginBottom: '28px' }}>
             {isFr
@@ -517,8 +642,8 @@ export default function StartClient() {
             </h1>
             <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '36px' }}>
               {isFr
-                ? 'Cochez ce qui vous concerne. Vous ne verrez que les questions utiles — et aucune n\u2019est obligatoire.'
-                : 'Tick what applies. You will only see the questions that matter — and none are required.'}
+                ? 'Cochez ce qui vous concerne. Vous ne verrez que les questions utiles — et seules vos coordonnées sont obligatoires.'
+                : 'Tick what applies. You will only see the questions that matter — and only your contact details are required.'}
             </p>
 
             <div style={{ display: 'grid', gap: '10px', marginBottom: '20px' }}>
@@ -627,6 +752,21 @@ export default function StartClient() {
                 : 'Nothing is sent automatically. You will see your brief on screen before sending it.'}
             </p>
             <div style={{ marginTop: '32px' }}>{CONTACT_FIELDS.map(renderField)}</div>
+
+            {showErrors && missing.length > 0 && (
+              <p
+                style={{
+                  color: '#ef4444',
+                  fontSize: '0.85rem',
+                  marginTop: '-6px',
+                  marginBottom: '8px',
+                }}
+              >
+                {isFr
+                  ? 'Vérifiez votre nom, votre email et votre téléphone pour que je puisse vous répondre.'
+                  : 'Please check your name, email and phone so I can get back to you.'}
+              </p>
+            )}
           </>
         )}
 
@@ -651,7 +791,18 @@ export default function StartClient() {
           )}
 
           {isContact ? (
-            <button type="button" onClick={() => setDone(true)} style={btn(true)}>
+            <button
+              type="button"
+              onClick={() => {
+                if (missing.length > 0) {
+                  setShowErrors(true);
+                  return;
+                }
+                setShowErrors(false);
+                setDone(true);
+              }}
+              style={{ ...btn(true), opacity: missing.length > 0 ? 0.45 : 1 }}
+            >
               {isFr ? 'Voir mon brief' : 'See my brief'} →
             </button>
           ) : (
