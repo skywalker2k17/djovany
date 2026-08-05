@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useActionState, useMemo, useState, startTransition } from 'react';
+import { useActionState, useEffect, useMemo, useState, startTransition } from 'react';
 import { useParams } from 'next/navigation';
 import {
   TRACKS,
@@ -56,6 +56,14 @@ export default function StartClient() {
   };
 
   const sections = useMemo(() => sectionsFor(tracks), [tracks]);
+
+  // Unchecking a track can shrink `sections` while `step` still points past
+  // its new end (e.g. mid-form on a section that no longer exists) — clamp
+  // instead of rendering neither the current section nor the contact step.
+  useEffect(() => {
+    setStep((s) => Math.min(s, sections.length + 1));
+  }, [sections.length]);
+
   const totalSteps = sections.length + 2;
   const progress = Math.round((step / (totalSteps - 1)) * 100);
 

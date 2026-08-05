@@ -67,3 +67,14 @@ h1, h2, h3, h4, h5, h6 {
 .glow {
   box-shadow: 0 0 40px rgba(0, 212, 255, 0.08);
 }
+
+/* position:fixed elements (nav, footer links, scroll buttons) can ignore an
+   ancestor's visibility:hidden when printing in some browsers — force them
+   out of the render tree instead of relying on inherited visibility. */
+@media print {
+  nav,
+  footer,
+  .scroll-btn {
+    display: none !important;
+  }
+}
