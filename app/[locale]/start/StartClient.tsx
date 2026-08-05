@@ -640,7 +640,7 @@ export default function StartClient() {
                 lineHeight: 1.15,
               }}
             >
-              {isFr ? 'Que voulez-vous construire ?' : 'What do you want to build?'}
+              {isFr ? 'Que voulez-vous faire ?' : 'What do you want to do?'}
             </h1>
             <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '36px' }}>
               {isFr
@@ -726,7 +726,14 @@ export default function StartClient() {
               {say(current.title)}
             </h1>
             {current.intro && (
-              <p style={{ color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '32px' }}>
+              <p
+                style={{
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.7,
+                  marginBottom: '32px',
+                  whiteSpace: 'pre-line',
+                }}
+              >
                 {say(current.intro)}
               </p>
             )}

@@ -159,7 +159,20 @@ export const SECTIONS: Section[] = [
           { fr: 'Témoignages', en: 'Testimonials' },
           { fr: 'Blog', en: 'Blog' },
           { fr: 'Contact', en: 'Contact' },
+          { fr: 'Autre', en: 'Other' },
         ],
+      },
+      {
+        kind: 'text',
+        id: 'pagesOther',
+        label: {
+          fr: 'Si autre, quelles pages ?',
+          en: 'If other, which pages?',
+        },
+        placeholder: {
+          fr: 'Tarifs, FAQ, Recrutement, Zone desservie…',
+          en: 'Pricing, FAQ, Careers, Service area…',
+        },
       },
       {
         kind: 'multi',
@@ -173,7 +186,20 @@ export const SECTIONS: Section[] = [
           { fr: 'Paiement en ligne', en: 'Online payments' },
           { fr: 'Galerie avant / après', en: 'Before / after gallery' },
           { fr: 'Site bilingue', en: 'Bilingual site' },
+          { fr: 'Autre', en: 'Other' },
         ],
+      },
+      {
+        kind: 'text',
+        id: 'featuresOther',
+        label: {
+          fr: 'Si autre, quelles fonctions ?',
+          en: 'If other, which features?',
+        },
+        placeholder: {
+          fr: 'Espace client, chat, newsletter, carte…',
+          en: 'Client portal, chat, newsletter, map…',
+        },
       },
       {
         kind: 'choice',
@@ -294,6 +320,10 @@ export const SECTIONS: Section[] = [
   {
     id: 'found',
     title: { fr: 'Être trouvé sur Google', en: 'Getting found on Google' },
+    intro: {
+      fr: 'Un site que personne ne trouve reste une brochure. Cette section sert à faire en sorte que les gens tombent sur vous au moment où ils cherchent ce que vous faites — sans payer de publicité.\n\nConcrètement : quand quelqu’un tape « nettoyage bureau Tampa », Google affiche d’abord une carte avec trois entreprises locales. Y figurer dépend surtout de votre fiche Google Business, pas de votre site. C’est gratuit, et c’est souvent ce qui génère le plus d’appels.\n\nVos réponses ci-dessous me disent quels mots utiliser dans vos textes, quelles villes viser, et ce qu’il reste à créer. Si vous ne savez pas quoi répondre, laissez vide — on en parlera.',
+      en: 'A site nobody finds is just a brochure. This section is about making sure people land on you at the moment they are searching for what you do — without paying for ads.\n\nIn practice: when someone types “office cleaning Tampa”, Google shows a map with three local businesses first. Appearing there depends mostly on your Google Business Profile, not on your website. It is free, and it is often what brings in the most calls.\n\nYour answers below tell me which words to use in your copy, which cities to target, and what is still missing. If you are not sure what to put, leave it blank — we will talk it through.',
+    },
     requires: ['seo', 'website', 'shop'],
     fields: [
       {
