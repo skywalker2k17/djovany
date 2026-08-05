@@ -213,7 +213,8 @@ export async function sendBrief(payload: BriefPayload): Promise<SendResult> {
   try {
     await tx.sendMail({
       // Must be your own address. Sending "from" the visitor fails SPF/DKIM.
-      from: `"djovanylevasseur.com" <${process.env.SMTP_USER ?? OWNER_EMAIL}>`,
+      // Display name matches the mailbox owner — a domain-like name here reads as spoofing to spam filters.
+      from: `"Djovany Levasseur" <${process.env.SMTP_USER ?? OWNER_EMAIL}>`,
       to: OWNER_EMAIL,
       replyTo: visitorEmail,
       subject: `${isFr ? 'Demande de projet' : 'Project request'} — ${who}`,
