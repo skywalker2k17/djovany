@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
+const FLAGS: Record<string, string> = { fr: '🇫🇷', en: '🇬🇧' };
+
 export default function Navbar({ locale }: { locale: string }) {
   const t = useTranslations('nav');
   const pathname = usePathname();
@@ -96,18 +98,25 @@ export default function Navbar({ locale }: { locale: string }) {
           {/* Lang switcher */}
           <Link
             href={switchPath}
+            aria-label={otherLocale === 'fr' ? 'Passer en français' : 'Switch to English'}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               fontSize: '0.75rem',
               fontWeight: 600,
               color: 'var(--text-muted)',
               textDecoration: 'none',
               border: '1px solid var(--border)',
-              borderRadius: '4px',
-              padding: '4px 10px',
-              letterSpacing: '0.08em',
+              borderRadius: '100px',
+              padding: '4px 12px 4px 8px',
+              letterSpacing: '0.04em',
               transition: 'all 0.2s',
             }}
           >
+            <span style={{ fontSize: '1rem', lineHeight: 1 }} aria-hidden="true">
+              {FLAGS[otherLocale]}
+            </span>
             {otherLocale.toUpperCase()}
           </Link>
         </div>
@@ -173,15 +182,23 @@ export default function Navbar({ locale }: { locale: string }) {
           <Link
             href={switchPath}
             onClick={() => setOpen(false)}
+            aria-label={otherLocale === 'fr' ? 'Passer en français' : 'Switch to English'}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
               color: 'var(--text-muted)',
               textDecoration: 'none',
               fontSize: '0.875rem',
               fontWeight: 600,
-              letterSpacing: '0.08em',
+              letterSpacing: '0.04em',
             }}
           >
-            → {otherLocale.toUpperCase()}
+            <span aria-hidden="true">→</span>
+            <span style={{ fontSize: '1.1rem', lineHeight: 1 }} aria-hidden="true">
+              {FLAGS[otherLocale]}
+            </span>
+            {otherLocale.toUpperCase()}
           </Link>
         </div>
       )}
