@@ -548,6 +548,7 @@ export default function StartClient() {
             {isFr ? 'Sommaire' : 'Contents'}
           </p>
 
+          <div className="start-toc-scroll">
           <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: '2px' }}>
             {toc.map((item) => {
               const active = item.i === step;
@@ -581,6 +582,7 @@ export default function StartClient() {
               );
             })}
           </ol>
+          </div>
 
           {tracks.length === 0 && (
             <p
@@ -840,6 +842,7 @@ export default function StartClient() {
       <style>{`
         .start-layout,
         .start-toc,
+        .start-toc-scroll,
         .start-toc ol {
           min-width: 0;
         }
@@ -855,6 +858,19 @@ export default function StartClient() {
             border-bottom: 1px solid var(--border);
             padding-bottom: 20px;
           }
+          .start-toc-scroll {
+            position: relative;
+          }
+          .start-toc-scroll::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 6px;
+            width: 36px;
+            pointer-events: none;
+            background: linear-gradient(to right, transparent, var(--bg) 85%);
+          }
           .start-toc ol {
             display: flex !important;
             width: 100%;
@@ -862,6 +878,7 @@ export default function StartClient() {
             overflow-x: auto;
             gap: 6px !important;
             padding-bottom: 6px !important;
+            padding-right: 28px;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
           }
