@@ -838,6 +838,12 @@ export default function StartClient() {
       </div>
 
       <style>{`
+        .start-layout,
+        .start-toc,
+        .start-toc ol {
+          min-width: 0;
+        }
+
         @media (max-width: 900px) {
           .start-layout {
             grid-template-columns: 1fr !important;
@@ -845,15 +851,19 @@ export default function StartClient() {
           }
           .start-toc {
             position: static !important;
+            width: 100%;
             border-bottom: 1px solid var(--border);
             padding-bottom: 20px;
           }
           .start-toc ol {
             display: flex !important;
+            width: 100%;
+            max-width: 100%;
             overflow-x: auto;
             gap: 6px !important;
             padding-bottom: 6px !important;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
           }
           .start-toc ol::-webkit-scrollbar { display: none; }
           .start-toc li { flex: 0 0 auto; }
