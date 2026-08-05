@@ -27,8 +27,11 @@ export const TRACKS: { id: TrackId; label: L; hint: L }[] = [
   },
   {
     id: 'ads',
-    label: { fr: 'Gagner de l\u2019argent avec la publicité', en: 'Earn from ads' },
-    hint: { fr: 'AdSense, AdMob', en: 'AdSense, AdMob' },
+    label: { fr: 'Que ça me rapporte de l\u2019argent', en: 'Make money from it' },
+    hint: {
+      fr: 'Abonnement, achat intégré, publicité…',
+      en: 'Subscription, in-app purchase, ads…',
+    },
   },
   {
     id: 'custom',
@@ -364,13 +367,44 @@ export const SECTIONS: Section[] = [
   /* ── ads ── */
   {
     id: 'ads',
-    title: { fr: 'Publicité et revenus', en: 'Ads and revenue' },
+    title: { fr: 'Vos revenus', en: 'Your revenue' },
     intro: {
-      fr: 'AdSense et AdMob ne fonctionnent pas dans tous les pays, et les moyens de paiement varient. Je vérifie ce qui est possible chez vous avant qu\u2019on prévoie quoi que ce soit.',
-      en: 'AdSense and AdMob are not available everywhere, and payout methods vary by country. I check what is possible for yours before we plan anything.',
+      fr: 'Comment votre site ou votre application doit-elle vous rapporter de l\u2019argent ? Il y a plusieurs mod\u00e8les, et la publicit\u00e9 est rarement le meilleur.\n\n\u2022 Abonnement mensuel \u2014 revenus r\u00e9guliers, id\u00e9al si vous offrez un service continu.\n\u2022 Achat unique ou achat int\u00e9gr\u00e9 \u2014 le client paie pour d\u00e9bloquer quelque chose.\n\u2022 Vente de produits ou de prestations \u2014 le plus direct.\n\u2022 Commission sur les transactions \u2014 si vous mettez en relation deux parties.\n\u2022 Publicit\u00e9 (AdSense, AdMob) \u2014 ne rapporte qu\u2019\u00e0 fort trafic, et ne fonctionne pas dans tous les pays.\n\u2022 Rien pour l\u2019instant \u2014 le site sert \u00e0 obtenir des clients, pas \u00e0 vendre en ligne. C\u2019est un choix parfaitement valable.\n\nSi vous h\u00e9sitez, laissez vide. On en parlera.',
+      en: 'How should your site or app make money? There are several models, and advertising is rarely the best one.\n\n\u2022 Monthly subscription \u2014 steady income, ideal if you provide an ongoing service.\n\u2022 One-off or in-app purchase \u2014 the customer pays to unlock something.\n\u2022 Selling products or services \u2014 the most direct.\n\u2022 Commission on transactions \u2014 if you connect two parties.\n\u2022 Advertising (AdSense, AdMob) \u2014 only pays at high traffic, and is not available in every country.\n\u2022 Nothing for now \u2014 the site exists to win clients, not to sell online. That is a perfectly valid choice.\n\nIf you are unsure, leave it blank. We will talk it through.',
     },
-    requires: ['ads'],
+    requires: ['ads', 'website', 'app', 'shop', 'custom'],
     fields: [
+      {
+        kind: 'multi',
+        id: 'revenue',
+        label: {
+          fr: 'Comment voulez-vous gagner de l\u2019argent ?',
+          en: 'How do you want to make money?',
+        },
+        options: [
+          { fr: 'Abonnement mensuel', en: 'Monthly subscription' },
+          { fr: 'Achat unique ou achat intégré', en: 'One-off or in-app purchase' },
+          { fr: 'Vente de produits ou de prestations', en: 'Selling products or services' },
+          { fr: 'Commission sur les transactions', en: 'Commission on transactions' },
+          { fr: 'Publicité', en: 'Advertising' },
+          { fr: 'Rien pour l\u2019instant', en: 'Nothing for now' },
+          { fr: 'Je ne sais pas, conseillez-moi', en: 'Not sure, advise me' },
+          { fr: 'Autre', en: 'Other' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'revenueOther',
+        label: { fr: 'Si autre, comment ?', en: 'If other, how?' },
+      },
+      {
+        kind: 'note',
+        id: 'adsnote',
+        label: {
+          fr: 'Les questions suivantes ne concernent que la publicité. Passez-les si ce n\u2019est pas votre modèle.',
+          en: 'The questions below are about advertising only. Skip them if that is not your model.',
+        },
+      },
       {
         kind: 'multi',
         id: 'adwhere',
@@ -388,13 +422,21 @@ export const SECTIONS: Section[] = [
           fr: 'Dans quel pays l\u2019entreprise est-elle enregistrée ?',
           en: 'Which country is the business registered in?',
         },
+        placeholder: {
+          fr: 'AdSense et AdMob ne fonctionnent pas partout',
+          en: 'AdSense and AdMob are not available everywhere',
+        },
       },
       {
         kind: 'text',
-        id: 'otherrevenue',
+        id: 'traffic',
         label: {
-          fr: 'Autres revenus prévus ? (abonnement, achat intégré)',
-          en: 'Other revenue planned? (subscription, in-app purchase)',
+          fr: 'Combien de visiteurs ou d\u2019utilisateurs par mois aujourd\u2019hui ?',
+          en: 'How many visitors or users per month today?',
+        },
+        placeholder: {
+          fr: 'Une estimation suffit. La publicité ne rapporte qu\u2019à gros volume.',
+          en: 'A rough guess is fine. Advertising only pays at volume.',
         },
       },
     ],
