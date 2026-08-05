@@ -386,7 +386,8 @@ export const SECTIONS: Section[] = [
           { fr: 'Achat unique ou achat intégré', en: 'One-off or in-app purchase' },
           { fr: 'Vente de produits ou de prestations', en: 'Selling products or services' },
           { fr: 'Commission sur les transactions', en: 'Commission on transactions' },
-          { fr: 'Publicité', en: 'Advertising' },
+          { fr: 'Publicité sur le site (AdSense)', en: 'Ads on the website (AdSense)' },
+          { fr: 'Publicité dans l\u2019application (AdMob)', en: 'Ads in the app (AdMob)' },
           { fr: 'Rien pour l\u2019instant', en: 'Nothing for now' },
           { fr: 'Je ne sais pas, conseillez-moi', en: 'Not sure, advise me' },
           { fr: 'Autre', en: 'Other' },
@@ -404,16 +405,6 @@ export const SECTIONS: Section[] = [
           fr: 'Les questions suivantes ne concernent que la publicité. Passez-les si ce n\u2019est pas votre modèle.',
           en: 'The questions below are about advertising only. Skip them if that is not your model.',
         },
-      },
-      {
-        kind: 'multi',
-        id: 'adwhere',
-        label: { fr: 'Où voulez-vous des publicités ?', en: 'Where do you want ads?' },
-        options: [
-          { fr: 'Sur mon site (AdSense)', en: 'On my website (AdSense)' },
-          { fr: 'Dans mon application (AdMob)', en: 'In my app (AdMob)' },
-          { fr: 'Je veux surtout comprendre si ça vaut le coup', en: 'I mainly want to know if it is worth it' },
-        ],
       },
       {
         kind: 'text',
