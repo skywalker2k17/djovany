@@ -13,7 +13,7 @@ export const TRACKS: { id: TrackId; label: L; hint: L }[] = [
   {
     id: 'app',
     label: { fr: 'Une application mobile', en: 'A mobile app' },
-    hint: { fr: 'iPhone et Android', en: 'iPhone and Android' },
+    hint: { fr: 'iPhone, Android, ou les deux', en: 'iPhone, Android, or both' },
   },
   {
     id: 'shop',
@@ -212,8 +212,10 @@ export const SECTIONS: Section[] = [
         id: 'platforms',
         label: { fr: 'Sur quelles plateformes ?', en: 'Which platforms?' },
         options: [
-          { fr: 'iPhone', en: 'iPhone' },
-          { fr: 'Android', en: 'Android' },
+          { fr: 'iPhone seulement', en: 'iPhone only' },
+          { fr: 'Android seulement', en: 'Android only' },
+          { fr: 'Les deux', en: 'Both' },
+          { fr: 'Je ne sais pas encore', en: 'Not sure yet' },
         ],
       },
       {
