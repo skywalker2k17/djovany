@@ -55,7 +55,7 @@ export type BriefPayload = {
   tracks: TrackId[];
   answers: Record<string, string | string[]>;
   /** Hidden field. Real people leave it empty; bots fill it. */
-  website?: string;
+  confirm_ref?: string;
 };
 
 export type SendResult =
@@ -173,7 +173,7 @@ function toHtml(blocks: Block[], isFr: boolean): string {
 
 export async function sendBrief(payload: BriefPayload): Promise<SendResult> {
   // 1. Honeypot — bots fill hidden fields
-  if (payload.website && payload.website.trim() !== '') {
+  if (payload.confirm_ref && payload.confirm_ref.trim() !== '') {
     return { ok: false, error: 'rejected' };
   }
 

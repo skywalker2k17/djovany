@@ -119,7 +119,7 @@ export default function StartClient() {
   const waHref = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(summary)}`;
 
   const submit = () => {
-    const payload: BriefPayload = { locale, tracks, answers, website: honeypot };
+    const payload: BriefPayload = { locale, tracks, answers, confirm_ref: honeypot };
     startTransition(() => submitBrief(payload));
   };
 
@@ -298,7 +298,7 @@ export default function StartClient() {
           {/* honeypot — hidden from sighted and screen-reader users, bots fill it */}
           <input
             type="text"
-            name="website"
+            name="confirm_ref"
             value={honeypot}
             onChange={(e) => setHoneypot(e.target.value)}
             tabIndex={-1}
