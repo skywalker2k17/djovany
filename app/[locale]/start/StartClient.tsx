@@ -190,9 +190,28 @@ export default function StartClient() {
   const renderField = (f: Field) => {
     if (f.kind === 'note') {
       return (
-        <p key={f.id} style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-          {say(f.label)}
-        </p>
+        <div
+          key={f.id}
+          style={{
+            background: 'rgba(0, 212, 255, 0.05)',
+            borderLeft: '2px solid var(--accent)',
+            borderRadius: '0 8px 8px 0',
+            padding: '16px 18px',
+            marginBottom: '26px',
+          }}
+        >
+          <p
+            style={{
+              color: 'var(--text-muted)',
+              fontSize: '0.83rem',
+              lineHeight: 1.65,
+              margin: 0,
+              whiteSpace: 'pre-line',
+            }}
+          >
+            {say(f.label)}
+          </p>
+        </div>
       );
     }
 
@@ -278,6 +297,75 @@ export default function StartClient() {
       </div>
     );
   };
+
+  /* ── explanatory notices, only for the sections the visitor actually saw ── */
+  const noticeBlocks = useMemo(
+    () =>
+      sections
+        .map((s) => ({
+          title: isFr ? s.title.fr : s.title.en,
+          notes: s.fields
+            .filter((f) => f.kind === 'note')
+            .map((f) => (isFr ? f.label.fr : f.label.en)),
+        }))
+        .filter((b) => b.notes.length > 0),
+    [sections, isFr]
+  );
+
+  /* ── terms shown on the final screen and printed with the brief ── */
+  const TERMS: { t: string; d: string }[] = isFr
+    ? [
+        {
+          t: 'Les prix couvrent la main-d\u2019œuvre.',
+          d: 'Le nom de domaine et l\u2019hébergement sont payés directement par vous. Leur coût dépend du projet, je vous le précise dans la proposition. Pour une application, les comptes développeur Apple et Google Play sont aussi à votre charge, ouverts au nom de votre entreprise.',
+        },
+        {
+          t: 'Maintenance : à partir de 35 $ par mois pour un site, 70 $ pour une application.',
+          d: 'Elle n\u2019est pas optionnelle : correctifs de sécurité, sauvegardes, compatibilité navigateurs, et pour une application les mises à jour imposées par Apple et Google. Une remise en état coûte toujours plus cher que le suivi.',
+        },
+        {
+          t: '30 jours de modifications gratuites après la livraison.',
+          d: 'Vous prenez le site ou l\u2019application en main, vous repérez ce qui vous gêne, et on ajuste sans frais pendant un mois. Passé ce délai, chaque modification fait l\u2019objet d\u2019un devis.',
+        },
+        {
+          t: 'Acompte de 50 % au démarrage, solde à la livraison.',
+          d: 'Paiement intégral au départ également possible. Le nombre d\u2019allers-retours est précisé dans la proposition ; les nouvelles fonctionnalités demandées après validation sont chiffrées à part.',
+        },
+        {
+          t: 'Ce qui vous appartient.',
+          d: 'Le domaine, l\u2019hébergement, les comptes développeur, les comptes Google et les contenus sont à vous, à votre nom, dès le départ. La propriété du code source peut vous être transférée sur demande.',
+        },
+        {
+          t: 'Tout est négociable.',
+          d: 'Chaque budget mérite une conversation.',
+        },
+      ]
+    : [
+        {
+          t: 'Prices cover the work itself.',
+          d: 'The domain name and hosting are paid directly by you. Their cost depends on the project, and I confirm it in the proposal. For an app, the Apple and Google Play developer accounts are also yours to cover, opened in your business name.',
+        },
+        {
+          t: 'Maintenance: from $35 a month for a website, $70 for an app.',
+          d: 'It is not optional: security patches, backups, browser compatibility, and for an app the updates required by Apple and Google. Putting things right always costs more than keeping them running.',
+        },
+        {
+          t: '30 days of free changes after delivery.',
+          d: 'You take the site or app in hand, spot what bothers you, and we adjust at no charge for a month. After that, each change is quoted.',
+        },
+        {
+          t: '50% deposit to start, balance on delivery.',
+          d: 'Full payment upfront is also welcome. The number of revision rounds is set out in the proposal; new features requested after approval are quoted separately.',
+        },
+        {
+          t: 'What belongs to you.',
+          d: 'The domain, the hosting, the developer accounts, the Google accounts and the content are yours, in your name, from day one. Ownership of the source code can be transferred to you on request.',
+        },
+        {
+          t: 'Everything is negotiable.',
+          d: 'Every budget deserves a conversation.',
+        },
+      ];
 
   if (done) {
     return (
@@ -411,6 +499,37 @@ export default function StartClient() {
             ← {isFr ? 'Modifier mes réponses' : 'Edit my answers'}
           </button>
 
+          {/* ── terms, on screen ── */}
+          <div style={{ marginTop: '56px' }}>
+            <p className="eyebrow" style={{ marginBottom: '18px' }}>
+              {isFr ? 'Bon à savoir' : 'Good to know'}
+            </p>
+            {TERMS.map((x) => (
+              <div key={x.t} style={{ marginBottom: '18px' }}>
+                <p
+                  style={{
+                    color: 'var(--text)',
+                    fontSize: '0.87rem',
+                    fontWeight: 600,
+                    margin: '0 0 4px',
+                  }}
+                >
+                  {x.t}
+                </p>
+                <p
+                  style={{
+                    color: 'var(--text-muted)',
+                    fontSize: '0.83rem',
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}
+                >
+                  {x.d}
+                </p>
+              </div>
+            ))}
+          </div>
+
           {/* ── print-only version ── */}
           <div id="brief-print" aria-hidden="true">
             <h1 className="bp-title">
@@ -437,6 +556,34 @@ export default function StartClient() {
                 ))}
               </div>
             ))}
+
+            {noticeBlocks.length > 0 && (
+              <div className="bp-block bp-notices">
+                <h2 className="bp-h2">
+                  {isFr ? 'À retenir' : 'Worth knowing'}
+                </h2>
+                {noticeBlocks.map((b) => (
+                  <div className="bp-notice" key={b.title}>
+                    <span className="bp-notice-t">{b.title}</span>
+                    {b.notes.map((n, i) => (
+                      <span className="bp-notice-d" key={`${b.title}-${i}`}>
+                        {n}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="bp-block bp-terms">
+              <h2 className="bp-h2">{isFr ? 'Bon à savoir' : 'Good to know'}</h2>
+              {TERMS.map((x) => (
+                <div className="bp-row" key={x.t}>
+                  <span className="bp-a" style={{ fontWeight: 600 }}>{x.t}</span>
+                  <span className="bp-q">{x.d}</span>
+                </div>
+              ))}
+            </div>
 
             <p className="bp-foot">
               Djovany Levasseur · djovanylevasseur.com · {EMAIL} · +509 4844 9536
@@ -509,6 +656,25 @@ export default function StartClient() {
               border-top: 0.5pt solid #ccc;
               font-size: 8pt;
               color: #777;
+            }
+            .bp-terms { page-break-before: always; }
+            .bp-terms .bp-q { margin-top: 2pt; }
+            .bp-notices { page-break-before: always; }
+            .bp-notice { margin-bottom: 12pt; page-break-inside: avoid; }
+            .bp-notice-t {
+              display: block;
+              font-size: 10pt;
+              font-weight: 600;
+              color: #111;
+              margin-bottom: 3pt;
+            }
+            .bp-notice-d {
+              display: block;
+              font-size: 9.5pt;
+              color: #444;
+              line-height: 1.5;
+              white-space: pre-line;
+              margin-bottom: 5pt;
             }
             @page { margin: 16mm 12mm; }
           }

@@ -205,6 +205,14 @@ export const SECTIONS: Section[] = [
         },
       },
       {
+        kind: 'note',
+        id: 'noteSelfedit',
+        label: {
+          fr: 'Un espace d\u2019administration — pour changer vos textes et vos photos vous-même — se prévoit dès le départ. Ajouté après coup, il coûte plus cher.',
+          en: 'An admin area — so you can change your own text and photos — is planned from the start. Added afterwards, it costs more.',
+        },
+      },
+      {
         kind: 'choice',
         id: 'selfedit',
         label: {
@@ -216,6 +224,14 @@ export const SECTIONS: Section[] = [
           { fr: 'Non', en: 'No' },
           { fr: 'Je ne sais pas', en: 'Not sure' },
         ],
+      },
+      {
+        kind: 'note',
+        id: 'noteContent',
+        label: {
+          fr: 'Si vous utilisez des images de banque, vérifiez qu\u2019elles sont bien achetées : une image téléchargée en aperçu porte un filigrane et ne peut pas être publiée. Et vos vraies photos de chantiers, de produits ou d\u2019équipe valent toujours mieux qu\u2019une image générique.',
+          en: 'If you use stock images, make sure they are actually purchased: a preview download carries a watermark and cannot be published. And your own photos of real jobs, products or team always beat a generic image.',
+        },
       },
       {
         kind: 'choice',
@@ -263,6 +279,14 @@ export const SECTIONS: Section[] = [
           { fr: 'À mes équipes', en: 'My team' },
           { fr: 'Aux deux', en: 'Both' },
         ],
+      },
+      {
+        kind: 'note',
+        id: 'noteStores',
+        label: {
+          fr: 'Deux choses à savoir sur les boutiques. Les comptes développeur Apple et Google Play sont ouverts à votre nom et payés par vous — frais unique chez Google, abonnement annuel chez Apple. Et chacune impose une échéance technique par an : Apple en avril, Google fin août. Une application qui ne suit pas cesse d\u2019être proposée aux nouveaux utilisateurs, puis finit par être retirée.',
+          en: 'Two things to know about the stores. The Apple and Google Play developer accounts are opened in your name and paid by you — a one-time fee at Google, an annual subscription at Apple. And each sets one technical deadline a year: Apple in April, Google at the end of August. An app that falls behind stops being offered to new users, then eventually gets pulled.',
+        },
       },
       {
         kind: 'multi',
@@ -402,8 +426,8 @@ export const SECTIONS: Section[] = [
         kind: 'note',
         id: 'adsnote',
         label: {
-          fr: 'Les questions suivantes ne concernent que la publicité. Passez-les si ce n\u2019est pas votre modèle.',
-          en: 'The questions below are about advertising only. Skip them if that is not your model.',
+          fr: 'Si vous envisagez la publicité, deux précisions.\n\nLes formats disponibles dans une application : la bannière, un bandeau discret qui rapporte peu ; l\u2019interstitiel, plein écran entre deux moments, à placer aux transitions et jamais au milieu d\u2019une action ; la publicité récompensée, où l\u2019utilisateur choisit de regarder une vidéo pour obtenir quelque chose — c\u2019est le format le mieux rémunéré et le seul que les gens acceptent volontiers ; l\u2019App Open, à l\u2019ouverture de l\u2019application, efficace mais à utiliser avec parcimonie ; et le format natif, intégré au design.\n\nEt une limite : AdSense et AdMob ne fonctionnent pas partout. Google applique les sanctions américaines, donc dans un pays sous embargo il n\u2019y a ni compte ni paiement possible. Ailleurs les moyens de versement varient beaucoup, avec un seuil minimum à atteindre. Je vérifie ce qui est possible chez vous avant qu\u2019on prévoie quoi que ce soit.',
+          en: 'If you are considering advertising, two things.\n\nThe formats available in an app: the banner, a discreet strip that pays little; the interstitial, full screen between two moments, placed at transitions and never mid-action; the rewarded ad, where the user chooses to watch a video to get something — the best-paying format, and the only one people genuinely accept; App Open, shown as the app launches, effective but to be used sparingly; and native, blended into the design.\n\nAnd one limit: AdSense and AdMob do not work everywhere. Google applies US sanctions, so in an embargoed country there is no account and no payout. Elsewhere payout methods vary widely, with a minimum threshold to reach. I check what is possible for your country before we plan anything.',
         },
       },
       {
