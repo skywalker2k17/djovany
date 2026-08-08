@@ -57,6 +57,8 @@ export type Field =
   | { kind: 'area'; id: string; label: L; placeholder?: L; required?: boolean }
   | { kind: 'choice'; id: string; label: L; options: L[]; required?: boolean }
   | { kind: 'multi'; id: string; label: L; options: L[]; required?: boolean }
+  | { kind: 'links'; id: string; label: L; platforms: string[]; hint?: L }
+  | { kind: 'hours'; id: string; label: L; hint?: L }
   | { kind: 'note'; id: string; label: L };
 
 export interface Section {
@@ -81,6 +83,52 @@ export const SECTIONS: Section[] = [
         label: { fr: 'Nom de l\u2019entreprise', en: 'Business name' },
       },
       {
+        kind: 'text',
+        id: 'businessEmail',
+        label: { fr: 'Email de l\u2019entreprise', en: 'Business email' },
+        placeholder: { fr: 'À afficher sur le site', en: 'To display on the site' },
+        validate: 'email',
+      },
+      {
+        kind: 'text',
+        id: 'businessPhone',
+        label: { fr: 'Téléphone de l\u2019entreprise', en: 'Business phone' },
+        placeholder: { fr: 'À afficher sur le site', en: 'To display on the site' },
+        validate: 'phone',
+      },
+      {
+        kind: 'links',
+        id: 'businessSocial',
+        label: { fr: 'Vos réseaux sociaux', en: 'Your social media' },
+        hint: {
+          fr: 'Optionnel. Ajoutez seulement ceux que vous avez.',
+          en: 'Optional. Add only the ones you have.',
+        },
+        platforms: [
+          'Facebook',
+          'Instagram',
+          'TikTok',
+          'Snapchat',
+          'LinkedIn',
+          'YouTube',
+          'X',
+          'Pinterest',
+          'WhatsApp',
+          'Google',
+          'Yelp',
+          'Autre',
+        ],
+      },
+      {
+        kind: 'hours',
+        id: 'businessHours',
+        label: { fr: 'Vos horaires d\u2019ouverture', en: 'Your opening hours' },
+        hint: {
+          fr: 'Optionnel. Cochez les jours où vous êtes ouvert et indiquez les heures.',
+          en: 'Optional. Tick the days you are open and set the hours.',
+        },
+      },
+      {
         kind: 'area',
         id: 'what',
         label: {
@@ -103,6 +151,24 @@ export const SECTIONS: Section[] = [
         label: {
           fr: 'Avez-vous déjà un site ou une application ? Le lien',
           en: 'Do you already have a site or app? The link',
+        },
+      },
+      {
+        kind: 'choice',
+        id: 'logo',
+        label: { fr: 'Avez-vous un logo ?', en: 'Do you have a logo?' },
+        options: [
+          { fr: 'Oui, j\u2019ai les fichiers', en: 'Yes, I have the files' },
+          { fr: 'Oui, mais je n\u2019ai que l\u2019image', en: 'Yes, but only an image' },
+          { fr: 'Non', en: 'No' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'colors',
+        label: {
+          fr: 'Des couleurs de marque à respecter ?',
+          en: 'Any brand colours to stick to?',
         },
       },
     ],
@@ -246,10 +312,75 @@ export const SECTIONS: Section[] = [
           { fr: 'Non, j\u2019aurais besoin d\u2019aide', en: 'No, I would need help' },
         ],
       },
+      {
+        kind: 'choice',
+        id: 'photoRights',
+        label: {
+          fr: 'Vos photos vous appartiennent-elles ?',
+          en: 'Do the photos belong to you?',
+        },
+        options: [
+          { fr: 'Oui, ce sont les miennes', en: 'Yes, they are mine' },
+          { fr: 'Images de banque achetées', en: 'Purchased stock images' },
+          { fr: 'Je ne sais pas', en: 'Not sure' },
+        ],
+      },
+      {
+        kind: 'multi',
+        id: 'proof',
+        label: {
+          fr: 'Qu\u2019avez-vous pour inspirer confiance ?',
+          en: 'What do you have to build trust?',
+        },
+        options: [
+          { fr: 'Avis clients Google', en: 'Google reviews' },
+          { fr: 'Avis Facebook', en: 'Facebook reviews' },
+          { fr: 'Témoignages écrits', en: 'Written testimonials' },
+          { fr: 'Certifications ou licences', en: 'Certifications or licences' },
+          { fr: 'Assurance', en: 'Insurance' },
+          { fr: 'Prix ou distinctions', en: 'Awards' },
+          { fr: 'Partenaires connus', en: 'Well-known partners' },
+          { fr: 'Rien pour l\u2019instant', en: 'Nothing yet' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'numbers',
+        label: {
+          fr: 'Des chiffres qu\u2019on peut afficher ?',
+          en: 'Any numbers we can display?',
+        },
+        placeholder: {
+          fr: '« 500+ clients », « 10 ans d\u2019expérience »',
+          en: '“500+ customers”, “10 years in business”',
+        },
+      },
+      {
+        kind: 'choice',
+        id: 'action',
+        label: {
+          fr: 'Quand quelqu\u2019un arrive sur le site, quelle est l\u2019action la plus importante ?',
+          en: 'When someone lands on the site, what is the single most important action?',
+        },
+        options: [
+          { fr: 'Vous appeler', en: 'Call you' },
+          { fr: 'Vous écrire', en: 'Email you' },
+          { fr: 'Demander un devis', en: 'Request a quote' },
+          { fr: 'Réserver un rendez-vous', en: 'Book an appointment' },
+          { fr: 'Acheter', en: 'Buy' },
+          { fr: 'Vous suivre sur les réseaux', en: 'Follow you on social' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'siteExperience',
+        label: {
+          fr: 'Avez-vous déjà fait appel à quelqu\u2019un pour un site ? Qu\u2019est-ce qui vous a manqué ?',
+          en: 'Have you worked with someone on a website before? What was missing?',
+        },
+      },
     ],
   },
-
-  /* ── mobile app ── */
   {
     id: 'app',
     title: { fr: 'Votre application', en: 'Your app' },
@@ -301,10 +432,63 @@ export const SECTIONS: Section[] = [
           { fr: 'Plannings et check-lists', en: 'Schedules and checklists' },
         ],
       },
+      {
+        kind: 'choice',
+        id: 'appleAccount',
+        label: {
+          fr: 'Avez-vous déjà un compte développeur Apple ?',
+          en: 'Do you already have an Apple Developer account?',
+        },
+        options: [
+          { fr: 'Oui', en: 'Yes' },
+          { fr: 'Non', en: 'No' },
+          { fr: 'Je ne sais pas', en: 'Not sure' },
+        ],
+      },
+      {
+        kind: 'choice',
+        id: 'googleAccount',
+        label: {
+          fr: 'Avez-vous déjà un compte développeur Google Play ?',
+          en: 'Do you already have a Google Play Developer account?',
+        },
+        options: [
+          { fr: 'Oui', en: 'Yes' },
+          { fr: 'Non', en: 'No' },
+          { fr: 'Je ne sais pas', en: 'Not sure' },
+        ],
+      },
+      {
+        kind: 'choice',
+        id: 'appUpdates',
+        label: {
+          fr: 'Souhaitez-vous un suivi mensuel des mises à jour ?',
+          en: 'Would you like a monthly update service?',
+        },
+        options: [
+          { fr: 'Oui', en: 'Yes' },
+          { fr: 'Non', en: 'No' },
+          { fr: 'À en discuter', en: 'Let\u2019s discuss' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'appFuture',
+        label: {
+          fr: 'Prévoyez-vous de faire évoluer l\u2019application après le lancement ?',
+          en: 'Do you plan to develop the app further after launch?',
+        },
+      },
+      {
+        kind: 'text',
+        id: 'appExperience',
+        label: {
+          fr: 'Avez-vous déjà fait développer une application auparavant ?',
+          en: 'Have you had an app built before?',
+        },
+      },
     ],
   },
-
-  /* ── shop ── */
   {
     id: 'shop',
     title: { fr: 'Votre boutique', en: 'Your store' },
@@ -340,10 +524,58 @@ export const SECTIONS: Section[] = [
           en: 'Do you already sell online anywhere?',
         },
       },
+      {
+        kind: 'choice',
+        id: 'productPhotos',
+        label: {
+          fr: 'Avez-vous des photos de chaque produit ?',
+          en: 'Do you have photos of each product?',
+        },
+        options: [
+          { fr: 'Oui, toutes', en: 'Yes, all of them' },
+          { fr: 'Une partie seulement', en: 'Some of them' },
+          { fr: 'Non', en: 'No' },
+        ],
+      },
+      {
+        kind: 'multi',
+        id: 'payment',
+        label: {
+          fr: 'Comment voulez-vous être payé ?',
+          en: 'How do you want to be paid?',
+        },
+        options: [
+          { fr: 'Carte bancaire', en: 'Card' },
+          { fr: 'Virement', en: 'Bank transfer' },
+          { fr: 'MonCash', en: 'MonCash' },
+          { fr: 'PayPal', en: 'PayPal' },
+          { fr: 'À la livraison', en: 'Cash on delivery' },
+          { fr: 'Autre', en: 'Other' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'stock',
+        label: {
+          fr: 'Avez-vous déjà un système pour suivre votre stock ?',
+          en: 'Do you already have a system for tracking stock?',
+        },
+      },
+      {
+        kind: 'choice',
+        id: 'promo',
+        label: {
+          fr: 'Avez-vous besoin de codes promo ou de réductions ?',
+          en: 'Do you need promo codes or discounts?',
+        },
+        options: [
+          { fr: 'Oui', en: 'Yes' },
+          { fr: 'Non', en: 'No' },
+          { fr: 'Plus tard', en: 'Later on' },
+        ],
+      },
     ],
   },
-
-  /* ── seo ── */
   {
     id: 'found',
     title: { fr: 'Être trouvé sur Google', en: 'Getting found on Google' },
@@ -385,10 +617,38 @@ export const SECTIONS: Section[] = [
           { fr: 'Rien pour l\u2019instant', en: 'Nothing yet' },
         ],
       },
+      {
+        kind: 'multi',
+        id: 'marketing',
+        label: {
+          fr: 'Qu\u2019est-ce qui vous intéresse ensuite ?',
+          en: 'What interests you next?',
+        },
+        options: [
+          { fr: 'Suivi des visites du site', en: 'Website visitor tracking' },
+          { fr: 'Savoir d\u2019où viennent les demandes', en: 'Knowing where enquiries come from' },
+          { fr: 'Rapport mensuel', en: 'Monthly report' },
+          { fr: 'Publicité Facebook et Instagram', en: 'Facebook and Instagram ads' },
+          { fr: 'Publicité Google', en: 'Google ads' },
+          { fr: 'Campagnes email', en: 'Email campaigns' },
+          { fr: 'Demandes d\u2019avis automatiques', en: 'Automatic review requests' },
+          { fr: 'Rien pour l\u2019instant', en: 'Nothing for now' },
+        ],
+      },
+      {
+        kind: 'text',
+        id: 'advertising',
+        label: {
+          fr: 'Faites-vous déjà de la publicité en ligne ?',
+          en: 'Do you already advertise online?',
+        },
+        placeholder: {
+          fr: 'Le budget publicitaire est payé directement aux plateformes, séparément',
+          en: 'Ad spend is paid directly to the platforms, separately',
+        },
+      },
     ],
   },
-
-  /* ── ads ── */
   {
     id: 'ads',
     title: { fr: 'Vos revenus', en: 'Your revenue' },
@@ -486,6 +746,78 @@ export const SECTIONS: Section[] = [
           fr: 'Quels outils utilisez-vous aujourd\u2019hui pour ça ?',
           en: 'What do you use for this today?',
         },
+      },
+    ],
+  },
+
+  {
+    id: 'assets',
+    title: { fr: 'Vos comptes et accès', en: 'Your accounts and access' },
+    intro: {
+      fr: 'Si vous n\u2019avez rien de tout ça, aucun souci — on le crée ensemble. Ces questions servent surtout à éviter de perdre deux semaines à chercher des accès au démarrage.',
+      en: 'If you have none of this, no problem — we set it up together. These questions mainly exist to avoid losing two weeks chasing logins at the start.',
+    },
+    requires: [],
+    fields: [
+      {
+        kind: 'text',
+        id: 'address',
+        label: {
+          fr: 'Adresse à afficher, si vous en avez une',
+          en: 'Address to display, if you have one',
+        },
+      },
+      {
+        kind: 'text',
+        id: 'domain',
+        label: {
+          fr: 'Nom de domaine déjà acheté ? Lequel, et chez qui',
+          en: 'Domain name already bought? Which one, and with whom',
+        },
+        placeholder: { fr: 'GoDaddy, Namecheap, autre…', en: 'GoDaddy, Namecheap, other…' },
+      },
+      {
+        kind: 'choice',
+        id: 'domainAccess',
+        label: {
+          fr: 'Avez-vous les identifiants de ce domaine ?',
+          en: 'Do you have the login details for that domain?',
+        },
+        options: [
+          { fr: 'Oui', en: 'Yes' },
+          { fr: 'Non', en: 'No' },
+          { fr: 'Quelqu\u2019un d\u2019autre les a', en: 'Someone else has them' },
+          { fr: 'Pas de domaine', en: 'No domain yet' },
+        ],
+      },
+      {
+        kind: 'multi',
+        id: 'accounts',
+        label: {
+          fr: 'Quels comptes existent déjà ?',
+          en: 'Which accounts already exist?',
+        },
+        options: [
+          { fr: 'Hébergement', en: 'Hosting' },
+          { fr: 'Google Analytics', en: 'Google Analytics' },
+          { fr: 'Google Search Console', en: 'Google Search Console' },
+          { fr: 'Google Business Profile', en: 'Google Business Profile' },
+          { fr: 'Aucun', en: 'None' },
+        ],
+      },
+      {
+        kind: 'choice',
+        id: 'oldSite',
+        label: {
+          fr: 'Si vous avez un ancien site, qu\u2019en fait-on ?',
+          en: 'If you have an old site, what should we do with it?',
+        },
+        options: [
+          { fr: 'Le remplacer', en: 'Replace it' },
+          { fr: 'Le rediriger', en: 'Redirect it' },
+          { fr: 'Le garder en parallèle', en: 'Keep it alongside' },
+          { fr: 'Pas d\u2019ancien site', en: 'No old site' },
+        ],
       },
     ],
   },

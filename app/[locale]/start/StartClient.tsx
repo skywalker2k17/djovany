@@ -101,7 +101,18 @@ export default function StartClient() {
       const rows = sec.fields
         .map((f) => {
           const v = answers[f.id];
-          const text = Array.isArray(v) ? v.join(', ') : (v ?? '').toString().trim();
+          if (Array.isArray(v)) {
+            const multiline = f.kind === 'links' || f.kind === 'hours';
+            const list = multiline
+              ? v.map((x) => x.trim()).filter((x) => x && !x.endsWith(':'))
+              : v.map((x) => x.trim()).filter(Boolean);
+            if (!list.length) return null;
+            return {
+              q: isFr ? f.label.fr : f.label.en,
+              a: list.join(multiline ? '\n' : ', '),
+            };
+          }
+          const text = (v ?? '').toString().trim();
           return text ? { q: isFr ? f.label.fr : f.label.en, a: text } : null;
         })
         .filter((x): x is { q: string; a: string } => x !== null);
@@ -211,6 +222,202 @@ export default function StartClient() {
           >
             {say(f.label)}
           </p>
+        </div>
+      );
+    }
+
+    if (f.kind === 'hours') {
+      const DAYS = isFr
+        ? ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const rows = Array.isArray(answers[f.id]) ? (answers[f.id] as string[]) : [];
+      const find = (d: string) => rows.find((r) => r.startsWith(`${d}: `));
+      const times = (d: string) => {
+        const r = find(d);
+        if (!r) return null;
+        const [o, c] = r.slice(d.length + 2).split(' - ');
+        return { o: o ?? '09:00', c: c ?? '17:00' };
+      };
+      const put = (d: string, o: string, c: string) => {
+        const others = rows.filter((r) => !r.startsWith(`${d}: `));
+        const next = [...others, `${d}: ${o} - ${c}`];
+        next.sort((a, b) => DAYS.indexOf(a.split(':')[0]) - DAYS.indexOf(b.split(':')[0]));
+        setAnswer(f.id, next);
+      };
+      const drop = (d: string) =>
+        setAnswer(f.id, rows.filter((r) => !r.startsWith(`${d}: `)));
+
+      return (
+        <div key={f.id} style={{ marginBottom: '26px' }}>
+          <label style={labelStyle}>{say(f.label)}</label>
+          {f.hint && (
+            <p style={{ color: 'var(--text-dim)', fontSize: '0.78rem', margin: '-4px 0 12px' }}>
+              {say(f.hint)}
+            </p>
+          )}
+
+          {DAYS.map((d) => {
+            const t = times(d);
+            const open = t !== null;
+            return (
+              <div
+                key={d}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  marginBottom: '7px',
+                  flexWrap: 'wrap',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => (open ? drop(d) : put(d, '09:00', '17:00'))}
+                  style={{
+                    ...pill(open),
+                    width: '118px',
+                    flexShrink: 0,
+                    padding: '9px 14px',
+                    textAlign: 'left',
+                  }}
+                >
+                  {open ? '✓ ' : ''}
+                  {d}
+                </button>
+
+                {open && t ? (
+                  <>
+                    <input
+                      type="time"
+                      value={t.o}
+                      onChange={(e) => put(d, e.target.value, t.c)}
+                      style={{ ...inputStyle, width: '118px', padding: '9px 12px' }}
+                    />
+                    <span style={{ color: 'var(--text-dim)', fontSize: '0.85rem' }}>–</span>
+                    <input
+                      type="time"
+                      value={t.c}
+                      onChange={(e) => put(d, t.o, e.target.value)}
+                      style={{ ...inputStyle, width: '118px', padding: '9px 12px' }}
+                    />
+                  </>
+                ) : (
+                  <span style={{ color: 'var(--text-dim)', fontSize: '0.82rem' }}>
+                    {isFr ? 'Fermé' : 'Closed'}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    if (f.kind === 'links') {
+      const rows = Array.isArray(answers[f.id]) ? (answers[f.id] as string[]) : [];
+      const parse = (r: string) => {
+        const i = r.indexOf(': ');
+        return i === -1
+          ? { p: f.platforms[0], u: r }
+          : { p: r.slice(0, i), u: r.slice(i + 2) };
+      };
+      const write = (idx: number, p: string, u: string) => {
+        const next = [...rows];
+        next[idx] = `${p}: ${u}`;
+        setAnswer(f.id, next);
+      };
+      const addRow = () => setAnswer(f.id, [...rows, `${f.platforms[0]}: `]);
+      const dropRow = (idx: number) =>
+        setAnswer(f.id, rows.filter((_, i) => i !== idx));
+
+      return (
+        <div key={f.id} style={{ marginBottom: '26px' }}>
+          <label style={labelStyle}>{say(f.label)}</label>
+          {f.hint && (
+            <p
+              style={{
+                color: 'var(--text-dim)',
+                fontSize: '0.78rem',
+                margin: '-4px 0 12px',
+              }}
+            >
+              {say(f.hint)}
+            </p>
+          )}
+
+          {rows.map((row, idx) => {
+            const { p, u } = parse(row);
+            return (
+              <div
+                key={idx}
+                style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}
+              >
+                <select
+                  value={p}
+                  onChange={(e) => write(idx, e.target.value, u)}
+                  style={{
+                    ...inputStyle,
+                    width: '130px',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                    padding: '12px 10px',
+                  }}
+                >
+                  {f.platforms.map((pl) => (
+                    <option key={pl} value={pl} style={{ background: 'var(--bg-2)' }}>
+                      {pl}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="url"
+                  inputMode="url"
+                  value={u}
+                  onChange={(e) => write(idx, p, e.target.value)}
+                  placeholder={isFr ? 'Lien ou nom d\u2019utilisateur' : 'Link or username'}
+                  style={{ ...inputStyle, flex: 1, minWidth: 0 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => dropRow(idx)}
+                  aria-label={isFr ? 'Retirer' : 'Remove'}
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid var(--border)',
+                    borderRadius: '8px',
+                    color: 'var(--text-muted)',
+                    width: '38px',
+                    height: '38px',
+                    flexShrink: 0,
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            );
+          })}
+
+          <button
+            type="button"
+            onClick={addRow}
+            style={{
+              background: 'transparent',
+              border: '1px dashed var(--border)',
+              borderRadius: '10px',
+              color: 'var(--accent)',
+              padding: '11px 20px',
+              fontSize: '0.85rem',
+              fontFamily: 'Inter, sans-serif',
+              cursor: 'pointer',
+              marginTop: rows.length ? '4px' : 0,
+            }}
+          >
+            + {rows.length === 0
+              ? isFr ? 'Ajouter un réseau' : 'Add a network'
+              : isFr ? 'Ajouter un autre' : 'Add another'}
+          </button>
         </div>
       );
     }
@@ -649,6 +856,7 @@ export default function StartClient() {
               display: block;
               font-size: 10.5pt;
               color: #111;
+              white-space: pre-line;
             }
             .bp-foot {
               margin-top: 20pt;

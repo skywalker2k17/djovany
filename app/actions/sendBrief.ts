@@ -108,7 +108,15 @@ function buildBlocks(payload: BriefPayload): Block[] {
     const rows = sec.fields
       .map((f) => {
         const v = payload.answers[f.id];
-        const text = Array.isArray(v) ? v.join(', ') : (v ?? '').toString().trim();
+        if (Array.isArray(v)) {
+          const multiline = f.kind === 'links' || f.kind === 'hours';
+          const list = multiline
+            ? v.map((x) => String(x).trim()).filter((x) => x && !x.endsWith(':'))
+            : v.map((x) => String(x).trim()).filter(Boolean);
+          if (!list.length) return null;
+          return { q: pick(f.label), a: list.join(multiline ? '\n' : ', ') };
+        }
+        const text = (v ?? '').toString().trim();
         return text ? { q: pick(f.label), a: text } : null;
       })
       .filter((x): x is { q: string; a: string } => x !== null);
