@@ -318,7 +318,7 @@ export default function StartClient() {
       const parse = (r: string) => {
         const i = r.indexOf(': ');
         return i === -1
-          ? { p: f.platforms[0], u: r }
+          ? { p: say(f.platforms[0]), u: r }
           : { p: r.slice(0, i), u: r.slice(i + 2) };
       };
       const write = (idx: number, p: string, u: string) => {
@@ -326,7 +326,7 @@ export default function StartClient() {
         next[idx] = `${p}: ${u}`;
         setAnswer(f.id, next);
       };
-      const addRow = () => setAnswer(f.id, [...rows, `${f.platforms[0]}: `]);
+      const addRow = () => setAnswer(f.id, [...rows, `${say(f.platforms[0])}: `]);
       const dropRow = (idx: number) =>
         setAnswer(f.id, rows.filter((_, i) => i !== idx));
 
@@ -364,8 +364,8 @@ export default function StartClient() {
                   }}
                 >
                   {f.platforms.map((pl) => (
-                    <option key={pl} value={pl} style={{ background: 'var(--bg-2)' }}>
-                      {pl}
+                    <option key={say(pl)} value={say(pl)} style={{ background: 'var(--bg-2)' }}>
+                      {say(pl)}
                     </option>
                   ))}
                 </select>

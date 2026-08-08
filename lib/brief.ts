@@ -57,7 +57,7 @@ export type Field =
   | { kind: 'area'; id: string; label: L; placeholder?: L; required?: boolean }
   | { kind: 'choice'; id: string; label: L; options: L[]; required?: boolean }
   | { kind: 'multi'; id: string; label: L; options: L[]; required?: boolean }
-  | { kind: 'links'; id: string; label: L; platforms: string[]; hint?: L }
+  | { kind: 'links'; id: string; label: L; platforms: L[]; hint?: L }
   | { kind: 'hours'; id: string; label: L; hint?: L }
   | { kind: 'note'; id: string; label: L };
 
@@ -105,18 +105,18 @@ export const SECTIONS: Section[] = [
           en: 'Optional. Add only the ones you have.',
         },
         platforms: [
-          'Facebook',
-          'Instagram',
-          'TikTok',
-          'Snapchat',
-          'LinkedIn',
-          'YouTube',
-          'X',
-          'Pinterest',
-          'WhatsApp',
-          'Google',
-          'Yelp',
-          'Autre',
+          { fr: 'Facebook', en: 'Facebook' },
+          { fr: 'Instagram', en: 'Instagram' },
+          { fr: 'TikTok', en: 'TikTok' },
+          { fr: 'Snapchat', en: 'Snapchat' },
+          { fr: 'LinkedIn', en: 'LinkedIn' },
+          { fr: 'YouTube', en: 'YouTube' },
+          { fr: 'X', en: 'X' },
+          { fr: 'Pinterest', en: 'Pinterest' },
+          { fr: 'WhatsApp', en: 'WhatsApp' },
+          { fr: 'Google', en: 'Google' },
+          { fr: 'Yelp', en: 'Yelp' },
+          { fr: 'Autre', en: 'Other' },
         ],
       },
       {
